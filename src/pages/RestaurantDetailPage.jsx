@@ -70,166 +70,146 @@ function RestaurantDetailPage() {
           ← Буцах
         </Link>
 
-        {/* ══ Two-column grid ══ */}
-        <div className="detail-two-col">
+        {/* ══ Title ══ */}
+        <h1 className="detail-name detail-name-heading">{restaurant.name}</h1>
 
-          {/* ════ LEFT: hero + about ════ */}
-          <div className="detail-left">
+        {/* ══ Rating Row ══ */}
+        <div className="detail-rating-wrap">
+          <StarRow rating={avgRating} size={18} />
+          <span className="detail-rating-value">{avgRating.toFixed(1)}</span>
+          <span className="detail-review-count">
+            ({reviewList.length > 0 ? reviewList.length : restaurant.reviewCount} үнэлгээ)
+          </span>
+          {restaurant.tags && restaurant.tags.map((tag, idx) => (
+            <span key={idx}>
+              #{tag}
+            </span>
+          ))}
+        </div>
 
-            {/* Hero */}
-            <div className="detail-hero-wrap">
-              {restaurant.image
-                ? <img className="detail-hero" src={restaurant.image} alt={restaurant.imageAlt} />
-                : <div className="detail-hero-placeholder">{restaurant.emoji}</div>
-              }
-              {/* Floating favourite */}
-              <button
-                className={`detail-fav-btn${restaurant.isFavorite ? " on" : ""}`}
-                onClick={() => toggleFavorite(restaurant.id)}
-                aria-label={restaurant.isFavorite ? "Хадгалсанаас хасах" : "Хадгалах"}
-              >
-                {restaurant.isFavorite ? "❤️" : "🤍"}
-              </button>
-            </div>
+        {/* ══ Hero Image Section ══ */}
+        <div className="detail-hero-image">
+          {restaurant.image
+            ? <img src={restaurant.image} alt={restaurant.imageAlt} />
+            : <div className="detail-hero-placeholder">{restaurant.emoji}</div>
+          }
+        </div>
 
-            {/* ── Тухай card ── */}
-            <div className="detail-about-card">
-              <h2 className="detail-about-title">Тухай</h2>
-              <p className="detail-about-desc">{restaurant.description}</p>
-
-              <div className="detail-about-rows">
-                <div className="about-row">
-                  <span className="about-label">⏰ Цагийн хуваарь</span>
-                  <span className="about-value">{restaurant.hours}</span>
-                </div>
-                <div className="about-row">
-                  <span className="about-label">📍 Хаяг</span>
-                  <span className="about-value">{restaurant.address}</span>
-                </div>
-                <div className="about-row">
-                  <span className="about-label">💰 Үнийн түвшин</span>
-                  <span className="about-value">{restaurant.priceRange}</span>
-                </div>
-                <div className="about-row">
-                  <span className="about-label">🍴 Хоолны төрөл</span>
-                  <span className="about-value">{restaurant.tags.join(", ")}</span>
-                </div>
-                <div className="about-row" style={{ borderBottom: "none" }}>
-                  <span className="about-label">🕐 Ажиллагаа</span>
-                  <span
-                    className="about-value"
-                    style={{
-                      color: restaurant.isOpen ? "var(--green)" : "var(--text-3)",
-                      fontWeight: 600,
-                    }}
-                  >
-                    {restaurant.isOpen ? "● Нээлттэй" : "● Хаалттай"}
-                  </span>
-                </div>
-              </div>
-            </div>
+        {/* ══ Restaurant Card Section ══ */}
+        <div className="detail-card">
+          {/* LEFT: Profile Picture */}
+          <div className="detail-card-profile">
+            {restaurant.emoji}
           </div>
 
-          {/* ════ RIGHT: identity + book + reviews ════ */}
-          <div className="detail-right">
+          {/* MIDDLE: Name Only */}
+          <h2 className="detail-card-name">{restaurant.name}</h2>
 
-            {/* Identity summary */}
-            <div className="detail-identity-card">
-              <h1 className="detail-name">{restaurant.name}</h1>
+          {/* RIGHT: Buttons */}
+          <div className="detail-card-buttons">
+            <button
+              className="btn btn-primary detail-card-btn-reserve"
+              onClick={() => setReserveOpen(true)}
+            >
+              🪑 ШИРЭЭ ЗАХИАЛАХ
+            </button>
+            <button
+              className="btn btn-outline btn-save detail-card-btn-save"
+              onClick={() => toggleFavorite(restaurant.id)}
+              aria-label={restaurant.isFavorite ? "Хадгалсанаас хасах" : "Хадгалах"}
+            >
+              {restaurant.isFavorite ? "❤️ ХАДГАЛСАН" : "🤍 ХАДГАЛАХ"}
+            </button>
+          </div>
+        </div>
 
-              <div className="detail-rating-row">
-                <StarRow rating={avgRating} size={16} />
-                <span className="detail-rating-num">{avgRating.toFixed(1)}</span>
-                <span className="detail-review-count">
-                  ({reviewList.length > 0 ? reviewList.length : restaurant.reviewCount} үнэлгээ)
-                </span>
-              </div>
+        {/* ══ Info Grid: Address, Phone, Hours ══ */}
+        <div className="detail-info-grid">
+          {/* Address */}
+          <div className="detail-info-item">
+            <h4>📍 Хаяг</h4>
+            <p>{restaurant.address}</p>
+          </div>
 
-              <div className="detail-info-row">
-                <span className={`detail-info-chip${restaurant.isOpen ? " open" : " closed"}`}>
-                  ● {restaurant.isOpen ? "Нээлттэй" : "Хаалттай"}
-                </span>
-                <span className="detail-info-chip">📍 {restaurant.distance} км</span>
-                <span className="detail-info-chip">⏱ {restaurant.deliveryTime} мин</span>
-                <span className="detail-info-chip">{restaurant.priceRange}</span>
-              </div>
+          {/* Phone */}
+          <div className="detail-info-item">
+            <h4>📞 Утас</h4>
+            <p>{restaurant.phone}</p>
+          </div>
 
-              <p className="detail-address">
-                <span>📍</span> {restaurant.address}
-              </p>
-            </div>
-
-            {/* ── Reservation panel ── */}
-            <div className="detail-panel">
-              <div className="detail-panel-hdr">
-                <span className="detail-panel-icon">🪑</span>
-                <div>
-                  <h3 className="detail-panel-title">Ширээ захиалах</h3>
-                  <p className="detail-panel-sub">Урьдчилан захиалж, хоол хүлээх шаардлагагүй.</p>
-                </div>
-              </div>
-              <button
-                className="btn btn-primary btn-lg"
-                style={{ width: "100%", marginTop: 14, justifyContent: "center" }}
-                onClick={() => setReserveOpen(true)}
-              >
-                🪑 Ширээ захиалах
-              </button>
-            </div>
-
-            {/* ── Reviews panel ── */}
-            <div className="detail-panel">
-              <div className="detail-panel-hdr">
-                <span className="detail-panel-icon">💬</span>
-                <div style={{ flex: 1 }}>
-                  <h3 className="detail-panel-title">
-                    Сэтгэгдэл
-                    {reviewList.length > 0 && (
-                      <span className="review-count-badge">{reviewList.length}</span>
-                    )}
-                  </h3>
-                  <p className="detail-panel-sub">Туршлагаа хуваалцаарай.</p>
-                </div>
-                <button
-                  className="btn btn-outline btn-sm"
-                  onClick={() => setReviewOpen(true)}
-                >
-                  + Бичих
-                </button>
-              </div>
-
-              {reviewList.length === 0 ? (
-                <div className="review-empty-state">
-                  <span style={{ fontSize: 32 }}>💬</span>
-                  <p>Одоогоор сэтгэгдэл байхгүй.</p>
-                  <button
-                    className="btn btn-primary btn-sm"
-                    style={{ marginTop: 8 }}
-                    onClick={() => setReviewOpen(true)}
-                  >
-                    Анхны сэтгэгдэл бичих
-                  </button>
-                </div>
+          {/* Hours */}
+          <div className="detail-info-item">
+            <h4>🕐 Ажиллах цаг</h4>
+            <p>
+              {restaurant.isOpen ? (
+                <span className="detail-status-open">Нээлттэй</span>
               ) : (
-                <div className="review-list">
-                  {reviewList.map((rv) => (
-                    <div key={rv.id} className="review-card anim-fade-up">
-                      <div className="review-top">
-                        <span className="review-author">{rv.author}</span>
-                        <span className="review-stars">
-                          {"★".repeat(rv.rating)}{"☆".repeat(5 - rv.rating)}
-                        </span>
-                      </div>
-                      <p className="review-text">{rv.comment}</p>
-                      {rv.date && <p className="review-date">{rv.date}</p>}
-                    </div>
-                  ))}
-                </div>
+                <span className="detail-status-closed">Хаалттай</span>
               )}
-            </div>
+              {" • " + restaurant.hours}
+            </p>
+          </div>
+        </div>
 
-          </div>{/* end right */}
-        </div>{/* end two-col */}
+        {/* ══ About Section ══ */}
+        <div className="detail-section">
+          <h2 className="detail-section-title">Дэлгэрэнгүй</h2>
+          <p className="detail-section-text">
+            {restaurant.description}
+          </p>
+        </div>
+{/* ══ Location Section with Map ══ */}
+        {restaurant.mapEmbed && (
+          <div className="detail-location-wrap">
+            <h2 className="detail-section-title">Байршил</h2>
+            <iframe
+              className="detail-map"
+              loading="lazy"
+              src={restaurant.mapEmbed}
+              allowFullScreen=""
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+          </div>
+        )}
+        {/* ══ Reviews Section ══ */}
+        <div className="detail-reviews-wrap">
+          <div className="detail-reviews-header">
+            <h2 className="detail-reviews-title">
+              Сэтгэгдэл ({reviewList.length > 0 ? reviewList.length : 0})
+            </h2>
+            <button
+              className="btn btn-primary btn-sm"
+              onClick={() => setReviewOpen(true)}
+            >
+              + Сэтгэгдэл бичих
+            </button>
+          </div>
+
+          {reviewList.length === 0 ? (
+            <div className="detail-reviews-empty">
+              <span className="detail-reviews-empty-icon">💬</span>
+              <p className="detail-reviews-empty-text">Одоогоор сэтгэгдэл байхгүй.</p>
+            </div>
+          ) : (
+            <div className="detail-review-list">
+              {reviewList.map((rv) => (
+                <div key={rv.id} className="detail-review-card anim-fade-up">
+                  <div className="detail-review-top">
+                    <span className="detail-review-author">{rv.author}</span>
+                    <span className="detail-review-stars">
+                      {"★".repeat(rv.rating)}{"☆".repeat(5 - rv.rating)}
+                    </span>
+                  </div>
+                  <p className="detail-review-text">{rv.comment}</p>
+                  {rv.date && <p className="detail-review-date">{rv.date}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        
+
       </div>
 
       {/* ── Modals (unchanged) ── */}
