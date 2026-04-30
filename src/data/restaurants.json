@@ -1,0 +1,208 @@
+{
+  "restaurants": [
+    {
+      "id": 1, "name": "Yuna", "emoji": "🍲",
+      "image": "/images/restaurants/yuna.jpg", "imageAlt": "Yuna ресторан",
+      "rating": 4.8, "reviewCount": 86,
+      "tags": ["Солонгос", "Ази"], "category": "korean",
+      "distance": 0.6, "isOpen": true, "section": "popular",
+      "isFavorite": false, "deliveryTime": 25, "priceRange": "₮₮",
+      "description": "Солонгос BBQ, bibimbap болон уламжлалт хоолоор мэргэшсэн ресторан.",
+      "address": "Royal Castle Apt, СБД-1, Улаанбаатар",
+      "hours": "11:00 – 23:00",
+      "menu": {
+        "Үндсэн хоол": [
+          {"name":"Beef Bulgogi","desc":"Амттан үхрийн мах, ногоо","price":"28,000₮"},
+          {"name":"Bibimbap","desc":"Хольмол хоол, өндөг","price":"22,000₮"},
+          {"name":"Kimchi Jjigae","desc":"Кимчи шөл, гахай мах","price":"20,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 2, "name": "Seoul Garden", "emoji": "🥩",
+      "image": "/images/restaurants/seoul-garden.jpg", "imageAlt": "Seoul Garden ресторан",
+      "rating": 4.2, "reviewCount": 64,
+      "tags": ["Солонгос", "BBQ"], "category": "korean",
+      "distance": 2.1, "isOpen": true, "section": "popular",
+      "isFavorite": false, "deliveryTime": 30, "priceRange": "₮₮",
+      "description": "Солонгосын уламжлалт мах шарах BBQ ресторан.",
+      "address": "Сүхбаатар дүүрэг, 1-р хороо, Улаанбаатар",
+      "hours": "12:00 – 00:00",
+      "menu": {
+        "BBQ": [
+          {"name":"Galbi","desc":"Үхрийн хавирга","price":"38,000₮"},
+          {"name":"Brisket","desc":"Үхрийн цээж","price":"32,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 3, "name": "Veranda", "emoji": "🍝",
+      "image": "/images/restaurants/verenda.jpg", "imageAlt": "Veranda Итали ресторан",
+      "rating": 4.6, "reviewCount": 52,
+      "tags": ["Итали"], "category": "italian",
+      "distance": 0.8, "isOpen": true, "section": "popular",
+      "isFavorite": true, "deliveryTime": 22, "priceRange": "₮₮₮",
+      "description": "Гар хийцийн паста, пицца, таниа амт бүхий Итали хоолны газар.",
+      "address": "Чингэлтэй дүүрэг, 2-р хороо, Улаанбаатар",
+      "hours": "11:00 – 22:00",
+      "menu": {
+        "Pasta": [
+          {"name":"Carbonara","desc":"Өндөг, гахай хялгасан мах","price":"26,000₮"},
+          {"name":"Arrabiata","desc":"Халуун нимгэн чинжүүтэй гоймон","price":"22,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 4, "name": "New York Empire", "emoji": "🥗",
+      "image": "/images/restaurants/newyork.jpg", "imageAlt": "New York Empire ресторан",
+      "rating": 4.1, "reviewCount": 48,
+      "tags": ["Европ", "Стейк"], "category": "european",
+      "distance": 3.4, "isOpen": false, "section": "popular",
+      "isFavorite": false, "deliveryTime": 40, "priceRange": "₮₮₮",
+      "description": "Нью-Йоркийн хэв маягаар бэлдсэн стейк, брунч, салад.",
+      "address": "Баянзүрх дүүрэг, 26-р байр, Улаанбаатар",
+      "hours": "10:00 – 22:00",
+      "menu": {
+        "Стейк": [
+          {"name":"Ribeye 300g","desc":"Хуурсан үхрийн мах","price":"65,000₮"},
+          {"name":"NY Strip","desc":"Нью-Йорк зүссэн мах","price":"58,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 5, "name": "Ger Kitchen", "emoji": "🏠",
+      "image": "", "imageAlt": "Ger Kitchen монгол хоол",
+      "rating": 4.4, "reviewCount": 71,
+      "tags": ["Монгол"], "category": "mongolian",
+      "distance": 1.2, "isOpen": true, "section": "popular",
+      "isFavorite": false, "deliveryTime": 18, "priceRange": "₮",
+      "description": "Уламжлалт монгол хоол — бууз, хуушуур, хорхог, тавгийн цай.",
+      "address": "Баянгол дүүрэг, 16-р хороо, Улаанбаатар",
+      "hours": "09:00 – 21:00",
+      "menu": {
+        "Уламжлалт": [
+          {"name":"Цагаан будаатай бууз","desc":"Уурт бууз, 10 ширхэг","price":"15,000₮"},
+          {"name":"Хуушуур","desc":"Тос дотор хуурсан, 10 ш","price":"12,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 6, "name": "Tian Tian", "emoji": "🥟",
+      "image": "/images/restaurants/tiantian.jpg", "imageAlt": "Tian Tian Хятад хоол",
+      "rating": 4.0, "reviewCount": 39,
+      "tags": ["Хятад", "Dim Sum"], "category": "chinese",
+      "distance": 4.7, "isOpen": true, "section": "new",
+      "isFavorite": false, "deliveryTime": 35, "priceRange": "₮₮",
+      "description": "Хятад гоймон, dumpling, хуурсан хоол сонголттой ресторан.",
+      "address": "Хан-Уул дүүрэг, 3-р хороо, Улаанбаатар",
+      "hours": "10:00 – 22:00",
+      "menu": {
+        "Dim Sum": [
+          {"name":"Har Gow","desc":"Хясаа Dim Sum","price":"16,000₮"},
+          {"name":"Siu Mai","desc":"Гахай мах Dim Sum","price":"14,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 7, "name": "Jangsu", "emoji": "🌶️",
+      "image": "/images/restaurants/jangsu.jpg", "imageAlt": "Jangsu Солонгос ресторан",
+      "rating": 4.3, "reviewCount": 55,
+      "tags": ["Солонгос", "Халуун"], "category": "korean",
+      "distance": 1.5, "isOpen": true, "section": "new",
+      "isFavorite": false, "deliveryTime": 28, "priceRange": "₮₮",
+      "description": "Халуун шөл, tteok-bokki, корейн жижиг хоолоор алдартай.",
+      "address": "Сүхбаатар дүүрэг, 8-р хороо, Улаанбаатар",
+      "hours": "11:00 – 23:00",
+      "menu": {
+        "Халуун хоол": [
+          {"name":"Tteokbokki","desc":"Харгай болон халуун нимгэн чинжүүтэй","price":"16,000₮"},
+          {"name":"Budae Jjigae","desc":"Хосолсон шөл","price":"22,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 8, "name": "Amore", "emoji": "🍕",
+      "image": "/images/restaurants/amore.jpg", "imageAlt": "Amore Итали ресторан",
+      "rating": 4.4, "reviewCount": 43,
+      "tags": ["Итали", "Pizza"], "category": "italian",
+      "distance": 2.3, "isOpen": false, "section": "new",
+      "isFavorite": false, "deliveryTime": 30, "priceRange": "₮₮₮",
+      "description": "Жинхэнэ нэхэсэн гурилаар бэлдсэн pizza болон тирамису.",
+      "address": "Чингэлтэй дүүрэг, 1-р хороо, Улаанбаатар",
+      "hours": "12:00 – 22:00",
+      "menu": {
+        "Pizza": [
+          {"name":"Diavola","desc":"Халуун чинжүү, салями","price":"30,000₮"},
+          {"name":"Prosciutto","desc":"Хөлдөлсөн хиам, рукола","price":"34,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 9, "name": "Pho Saigon", "emoji": "🍜",
+      "image": "/images/restaurants/pho.jpg", "imageAlt": "Pho Saigon Вьетнам ресторан",
+      "rating": 3.8, "reviewCount": 29,
+      "tags": ["Вьетнам"], "category": "vietnamese",
+      "distance": 2.9, "isOpen": true, "section": "new",
+      "isFavorite": false, "deliveryTime": 32, "priceRange": "₮",
+      "description": "Вьетнамын уламжлалт фо, ном том, боборак. Хурдан, эрүүл, амттай.",
+      "address": "Сүхбаатар дүүрэг, 14-р хороо, Улаанбаатар",
+      "hours": "10:00 – 21:00",
+      "menu": {
+        "Шөл": [
+          {"name":"Pho Bo","desc":"Үхрийн мяхтай фо шөл","price":"14,000₮"},
+          {"name":"Bun Bo Hue","desc":"Халуун шөл, лаймтай","price":"15,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 10, "name": "Samarkand", "emoji": "🫓",
+      "image": "/images/restaurants/samarkand.jpg", "imageAlt": "Samarkand Узбек ресторан",
+      "rating": 3.5, "reviewCount": 18,
+      "tags": ["Узбек"], "category": "uzbek",
+      "distance": 5.1, "isOpen": true, "section": "new",
+      "isFavorite": false, "deliveryTime": 45, "priceRange": "₮₮",
+      "description": "Узбекийн уламжлалт плов, манты, шашлык. Дунд Азийн амт таны өмнө.",
+      "address": "Хан-Уул дүүрэг, 11-р хороо, Улаанбаатар",
+      "hours": "11:00 – 22:00",
+      "menu": {
+        "Үндсэн хоол": [
+          {"name":"Osh Palov","desc":"Хурга мах, шар лууван, будаа","price":"18,000₮"},
+          {"name":"Shashlik","desc":"Шарсан мах, ногоотой","price":"22,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 11, "name": "Steppe Bistro", "emoji": "🌿",
+      "image": "", "imageAlt": "Steppe Bistro монгол хоол",
+      "rating": 2.8, "reviewCount": 12,
+      "tags": ["Монгол"], "category": "mongolian",
+      "distance": 6.2, "isOpen": false, "section": "new",
+      "isFavorite": false, "deliveryTime": 50, "priceRange": "₮",
+      "description": "Ард түмний уламжлалт хоол. Цөцгийтэй бууз, шарсан бог мал.",
+      "address": "Баянзүрх дүүрэг, 5-р хороо, Улаанбаатар",
+      "hours": "09:00 – 20:00",
+      "menu": {
+        "Уламжлалт": [
+          {"name":"Цагаан идээ","desc":"Уламжлалт цагаан хоол","price":"8,000₮"}
+        ]
+      }
+    },
+    {
+      "id": 12, "name": "Dragon Palace", "emoji": "🐉",
+      "image": "/images/restaurants/dragon.jpg", "imageAlt": "Dragon Palace Хятад ресторан",
+      "rating": 3.2, "reviewCount": 24,
+      "tags": ["Хятад"], "category": "chinese",
+      "distance": 3.8, "isOpen": true, "section": "new",
+      "isFavorite": false, "deliveryTime": 38, "priceRange": "₮₮",
+      "description": "Хятадын өмнөд хэв маягийн хоол. Хуурсан хоол, горьтой шөл.",
+      "address": "Баянгол дүүрэг, 7-р хороо, Улаанбаатар",
+      "hours": "11:00 – 22:30",
+      "menu": {
+        "Хуурсан хоол": [
+          {"name":"Kung Pao Chicken","desc":"Халуун тахиа, самар","price":"20,000₮"},
+          {"name":"Mapo Tofu","desc":"Тофу, чинжүү тос","price":"17,000₮"}
+        ]
+      }
+    }
+  ]
+}
