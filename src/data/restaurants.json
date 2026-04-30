@@ -9,7 +9,20 @@
       "isFavorite": false, "deliveryTime": 25, "priceRange": "₮₮",
       "description": "Солонгос BBQ, bibimbap болон уламжлалт хоолоор мэргэшсэн ресторан.",
       "address": "Royal Castle Apt, СБД-1, Улаанбаатар",
+      "phone": "+976 7710 0060",
+      "email": "info@yuna.mn",
+      "website": "www.yuna.mn",
       "hours": "11:00 – 23:00",
+      "weeklyHours": {
+        "Sunday": "11:00 AM - 11:59 PM",
+        "Monday": "11:00 AM - 11:59 PM",
+        "Tuesday": "11:00 AM - 11:59 PM",
+        "Wednesday": "11:00 AM - 11:59 PM",
+        "Thursday": "11:00 AM - 11:59 PM",
+        "Friday": "11:00 AM - 11:59 PM",
+        "Saturday": "11:00 AM - 11:59 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Үндсэн хоол": [
           {"name":"Beef Bulgogi","desc":"Амттан үхрийн мах, ногоо","price":"28,000₮"},
@@ -27,7 +40,20 @@
       "isFavorite": false, "deliveryTime": 30, "priceRange": "₮₮",
       "description": "Солонгосын уламжлалт мах шарах BBQ ресторан.",
       "address": "Сүхбаатар дүүрэг, 1-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0061",
+      "email": "contact@seoulgardenMN.mn",
+      "website": "www.seoulgardenMN.mn",
       "hours": "12:00 – 00:00",
+      "weeklyHours": {
+        "Sunday": "12:00 PM - 12:00 AM",
+        "Monday": "12:00 PM - 12:00 AM",
+        "Tuesday": "12:00 PM - 12:00 AM",
+        "Wednesday": "12:00 PM - 12:00 AM",
+        "Thursday": "12:00 PM - 12:00 AM",
+        "Friday": "12:00 PM - 12:00 AM",
+        "Saturday": "12:00 PM - 12:00 AM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "BBQ": [
           {"name":"Galbi","desc":"Үхрийн хавирга","price":"38,000₮"},
@@ -44,7 +70,20 @@
       "isFavorite": true, "deliveryTime": 22, "priceRange": "₮₮₮",
       "description": "Гар хийцийн паста, пицца, таниа амт бүхий Итали хоолны газар.",
       "address": "Чингэлтэй дүүрэг, 2-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0062",
+      "email": "hello@veranda.mn",
+      "website": "www.veranda.mn",
       "hours": "11:00 – 22:00",
+      "weeklyHours": {
+        "Sunday": "11:00 AM - 10:00 PM",
+        "Monday": "11:00 AM - 10:00 PM",
+        "Tuesday": "11:00 AM - 10:00 PM",
+        "Wednesday": "11:00 AM - 10:00 PM",
+        "Thursday": "11:00 AM - 10:00 PM",
+        "Friday": "11:00 AM - 10:00 PM",
+        "Saturday": "11:00 AM - 10:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Pasta": [
           {"name":"Carbonara","desc":"Өндөг, гахай хялгасан мах","price":"26,000₮"},
@@ -61,7 +100,20 @@
       "isFavorite": false, "deliveryTime": 40, "priceRange": "₮₮₮",
       "description": "Нью-Йоркийн хэв маягаар бэлдсэн стейк, брунч, салад.",
       "address": "Баянзүрх дүүрэг, 26-р байр, Улаанбаатар",
+      "phone": "+976 7710 0063",
+      "email": "reserve@nyempire.mn",
+      "website": "www.nyempire.mn",
       "hours": "10:00 – 22:00",
+      "weeklyHours": {
+        "Sunday": "10:00 AM - 10:00 PM",
+        "Monday": "10:00 AM - 10:00 PM",
+        "Tuesday": "10:00 AM - 10:00 PM",
+        "Wednesday": "10:00 AM - 10:00 PM",
+        "Thursday": "10:00 AM - 10:00 PM",
+        "Friday": "10:00 AM - 10:00 PM",
+        "Saturday": "10:00 AM - 10:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Стейк": [
           {"name":"Ribeye 300g","desc":"Хуурсан үхрийн мах","price":"65,000₮"},
@@ -78,7 +130,20 @@
       "isFavorite": false, "deliveryTime": 18, "priceRange": "₮",
       "description": "Уламжлалт монгол хоол — бууз, хуушуур, хорхог, тавгийн цай.",
       "address": "Баянгол дүүрэг, 16-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0064",
+      "email": "kitchen@gerkitchen.mn",
+      "website": "www.gerkitchen.mn",
       "hours": "09:00 – 21:00",
+      "weeklyHours": {
+        "Sunday": "9:00 AM - 9:00 PM",
+        "Monday": "9:00 AM - 9:00 PM",
+        "Tuesday": "9:00 AM - 9:00 PM",
+        "Wednesday": "9:00 AM - 9:00 PM",
+        "Thursday": "9:00 AM - 9:00 PM",
+        "Friday": "9:00 AM - 9:00 PM",
+        "Saturday": "9:00 AM - 9:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Уламжлалт": [
           {"name":"Цагаан будаатай бууз","desc":"Уурт бууз, 10 ширхэг","price":"15,000₮"},
@@ -95,7 +160,20 @@
       "isFavorite": false, "deliveryTime": 35, "priceRange": "₮₮",
       "description": "Хятад гоймон, dumpling, хуурсан хоол сонголттой ресторан.",
       "address": "Хан-Уул дүүрэг, 3-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0065",
+      "email": "order@tiantian.mn",
+      "website": "www.tiantian.mn",
       "hours": "10:00 – 22:00",
+      "weeklyHours": {
+        "Sunday": "10:00 AM - 10:00 PM",
+        "Monday": "10:00 AM - 10:00 PM",
+        "Tuesday": "10:00 AM - 10:00 PM",
+        "Wednesday": "10:00 AM - 10:00 PM",
+        "Thursday": "10:00 AM - 10:00 PM",
+        "Friday": "10:00 AM - 10:00 PM",
+        "Saturday": "10:00 AM - 10:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Dim Sum": [
           {"name":"Har Gow","desc":"Хясаа Dim Sum","price":"16,000₮"},
@@ -112,7 +190,20 @@
       "isFavorite": false, "deliveryTime": 28, "priceRange": "₮₮",
       "description": "Халуун шөл, tteok-bokki, корейн жижиг хоолоор алдартай.",
       "address": "Сүхбаатар дүүрэг, 8-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0066",
+      "email": "spicy@jangsu.mn",
+      "website": "www.jangsu.mn",
       "hours": "11:00 – 23:00",
+      "weeklyHours": {
+        "Sunday": "11:00 AM - 11:59 PM",
+        "Monday": "11:00 AM - 11:59 PM",
+        "Tuesday": "11:00 AM - 11:59 PM",
+        "Wednesday": "11:00 AM - 11:59 PM",
+        "Thursday": "11:00 AM - 11:59 PM",
+        "Friday": "11:00 AM - 11:59 PM",
+        "Saturday": "11:00 AM - 11:59 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Халуун хоол": [
           {"name":"Tteokbokki","desc":"Харгай болон халуун нимгэн чинжүүтэй","price":"16,000₮"},
@@ -129,7 +220,20 @@
       "isFavorite": false, "deliveryTime": 30, "priceRange": "₮₮₮",
       "description": "Жинхэнэ нэхэсэн гурилаар бэлдсэн pizza болон тирамису.",
       "address": "Чингэлтэй дүүрэг, 1-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0067",
+      "email": "amore@amorepizza.mn",
+      "website": "www.amorepizza.mn",
       "hours": "12:00 – 22:00",
+      "weeklyHours": {
+        "Sunday": "12:00 PM - 10:00 PM",
+        "Monday": "12:00 PM - 10:00 PM",
+        "Tuesday": "12:00 PM - 10:00 PM",
+        "Wednesday": "12:00 PM - 10:00 PM",
+        "Thursday": "12:00 PM - 10:00 PM",
+        "Friday": "12:00 PM - 10:00 PM",
+        "Saturday": "12:00 PM - 10:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.3!2d106.91!3d47.91!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sAmore!5e0!3m2!1sen!2smn!4v1234567896",
       "menu": {
         "Pizza": [
           {"name":"Diavola","desc":"Халуун чинжүү, салями","price":"30,000₮"},
@@ -146,7 +250,20 @@
       "isFavorite": false, "deliveryTime": 32, "priceRange": "₮",
       "description": "Вьетнамын уламжлалт фо, ном том, боборак. Хурдан, эрүүл, амттай.",
       "address": "Сүхбаатар дүүрэг, 14-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0068",
+      "email": "pho@pho-saigon.mn",
+      "website": "www.pho-saigon.mn",
       "hours": "10:00 – 21:00",
+      "weeklyHours": {
+        "Sunday": "10:00 AM - 9:00 PM",
+        "Monday": "10:00 AM - 9:00 PM",
+        "Tuesday": "10:00 AM - 9:00 PM",
+        "Wednesday": "10:00 AM - 9:00 PM",
+        "Thursday": "10:00 AM - 9:00 PM",
+        "Friday": "10:00 AM - 9:00 PM",
+        "Saturday": "10:00 AM - 9:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2674.0974318915646!2d106.91739299999999!3d47.915152199999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5d969248a73402ad%3A0x4ec385cc535ff660!2sVeranda!5e0!3m2!1sen!2smn!4v1777565960662!5m2!1sen!2smn",
       "menu": {
         "Шөл": [
           {"name":"Pho Bo","desc":"Үхрийн мяхтай фо шөл","price":"14,000₮"},
@@ -163,7 +280,20 @@
       "isFavorite": false, "deliveryTime": 45, "priceRange": "₮₮",
       "description": "Узбекийн уламжлалт плов, манты, шашлык. Дунд Азийн амт таны өмнө.",
       "address": "Хан-Уул дүүрэг, 11-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0069",
+      "email": "samarkand@samarkand.mn",
+      "website": "www.samarkand.mn",
       "hours": "11:00 – 22:00",
+      "weeklyHours": {
+        "Sunday": "11:00 AM - 10:00 PM",
+        "Monday": "11:00 AM - 10:00 PM",
+        "Tuesday": "11:00 AM - 10:00 PM",
+        "Wednesday": "11:00 AM - 10:00 PM",
+        "Thursday": "11:00 AM - 10:00 PM",
+        "Friday": "11:00 AM - 10:00 PM",
+        "Saturday": "11:00 AM - 10:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2676.5!2d106.94!3d47.88!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sSamarkand!5e0!3m2!1sen!2smn!4v1234567898",
       "menu": {
         "Үндсэн хоол": [
           {"name":"Osh Palov","desc":"Хурга мах, шар лууван, будаа","price":"18,000₮"},
@@ -180,7 +310,20 @@
       "isFavorite": false, "deliveryTime": 50, "priceRange": "₮",
       "description": "Ард түмний уламжлалт хоол. Цөцгийтэй бууз, шарсан бог мал.",
       "address": "Баянзүрх дүүрэг, 5-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0070",
+      "email": "steppe@bistro.mn",
+      "website": "www.steppebistro.mn",
       "hours": "09:00 – 20:00",
+      "weeklyHours": {
+        "Sunday": "9:00 AM - 8:00 PM",
+        "Monday": "9:00 AM - 8:00 PM",
+        "Tuesday": "9:00 AM - 8:00 PM",
+        "Wednesday": "9:00 AM - 8:00 PM",
+        "Thursday": "9:00 AM - 8:00 PM",
+        "Friday": "9:00 AM - 8:00 PM",
+        "Saturday": "9:00 AM - 8:00 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2672.5!2d106.87!3d47.93!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sSteppe%20Bistro!5e0!3m2!1sen!2smn!4v1234567899",
       "menu": {
         "Уламжлалт": [
           {"name":"Цагаан идээ","desc":"Уламжлалт цагаан хоол","price":"8,000₮"}
@@ -196,7 +339,20 @@
       "isFavorite": false, "deliveryTime": 38, "priceRange": "₮₮",
       "description": "Хятадын өмнөд хэв маягийн хоол. Хуурсан хоол, горьтой шөл.",
       "address": "Баянгол дүүрэг, 7-р хороо, Улаанбаатар",
+      "phone": "+976 7710 0071",
+      "email": "dragon@dragonpalace.mn",
+      "website": "www.dragonpalace.mn",
       "hours": "11:00 – 22:30",
+      "weeklyHours": {
+        "Sunday": "11:00 AM - 10:30 PM",
+        "Monday": "11:00 AM - 10:30 PM",
+        "Tuesday": "11:00 AM - 10:30 PM",
+        "Wednesday": "11:00 AM - 10:30 PM",
+        "Thursday": "11:00 AM - 10:30 PM",
+        "Friday": "11:00 AM - 10:30 PM",
+        "Saturday": "11:00 AM - 10:30 PM"
+      },
+      "mapEmbed": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2675.0!2d106.90!3d47.90!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sDragon%20Palace!5e0!3m2!1sen!2smn!4v1234567900",
       "menu": {
         "Хуурсан хоол": [
           {"name":"Kung Pao Chicken","desc":"Халуун тахиа, самар","price":"20,000₮"},
