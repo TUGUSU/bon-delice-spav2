@@ -1330,3 +1330,87 @@ body {
     font-size: 14px;
     margin-left: 8px;
 }
+
+/* --- CATEGORY CARD-Н БҮРЭН ЗАСВАР (ЗУРАГ ГАРГАХ) --- */
+
+/* --- CATEGORY CARD-Н БҮРЭН ЗАСВАР (ЗУРАГ ГАРГАХ) --- */
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Хоёр баганатай болгох */
+  gap: 16px; /* Хоорондын зай */
+}
+
+/* Бүх картны үндсэн загвар */
+.cat-card {
+  position: relative;
+  display: block; /* Link таг тул block болгох */
+  border-radius: 16px; /* Дугуй ирмэг */
+  overflow: hidden; /* Ирмэгээс илүү гарсан зүйлийг нуух */
+  text-decoration: none;
+  min-height: 120px; /* Картны доод өндөр */
+  background-color: var(--bg-2); /* Зураг ачаалахаас өмнө харагдах өнгө */
+}
+
+/* Зүүн талын том карт (Ресторан) */
+.cat-card.tall {
+  grid-row: span 2; /* Хоёр мөрийг эзлэх */
+  min-height: 256px; /* Том картны өндөр */
+}
+
+/* ЗУРГИЙГ ХАРУУЛАХ ГОЛ СТИЛЬ */
+.cat-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Зургийг сунгахгүйгээр дүүргэх */
+  z-index: 1; /* Хамгийн доор байрлана */
+  transition: transform 0.4s ease;
+}
+
+/* ЗУРГИЙГ ХАЛХАЛДАГ БАЙСАН OVERLAY-Г ЗАСАХ */
+.cat-card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Доороос дээш бараан болдог градиент (текст уншигдахад тусална) */
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.7) 100%);
+  z-index: 2; /* Зургийн дээр, текстийн доор */
+}
+
+/* ТЕКСТИЙГ ХАРУУЛАХ ГОЛ СТИЛЬ */
+.cat-card-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  z-index: 3; /* Хамгийн дээр байрлана */
+}
+
+/* Дээгүүр нь хулгана очиход зураг томрох эффект */
+.cat-card:hover .cat-card-img {
+  transform: scale(1.05);
+}
+
+/* ТЕКСТИЙГ ХАРУУЛАХ ГОЛ СТИЛЬ */
+.cat-card-label {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  color: white;
+  font-size: 22px;
+  font-weight: 700;
+  z-index: 3; /* Хамгийн дээр байрлана */
+}
+
+/* Дээгүүр нь хулгана очиход зураг томрох эффект */
+.cat-card:hover .cat-card-img {
+  transform: scale(1.05);
+}
+
