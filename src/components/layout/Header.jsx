@@ -16,7 +16,7 @@ function Header() {
 
     return (
         <header className="header">
-            <Link to="/restaurants" className="header-logo">
+            <Link to="/home" className="header-logo">
                 <img 
                     src="/images/banners/logo.png" 
                     alt="Bon Delice Logo" 
