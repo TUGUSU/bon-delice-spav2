@@ -72,13 +72,30 @@ ul,ol{list-style:none}
   align-items:center;
   gap:16px;
 }
-.header-logo{
-  display:flex;align-items:center;gap:8px;
-  font-size:22px;font-weight:800;color:var(--red);
-  letter-spacing:-.5px;flex-shrink:0;
-  text-decoration:none;
+
+.header-logo {
+  justify-self: start;
+  display: flex;
+  align-items: center;
+  gap: 10px; 
+  text-decoration: none;
+  cursor: pointer;
 }
-.header-logo svg{width:32px;height:32px}
+
+.custom-logo-img {
+  height: 36px; 
+  width: auto;  
+  max-width: 150px; 
+  object-fit: contain;
+  border-radius: 8px; 
+}
+
+.logo-text {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--red); 
+  letter-spacing: -0.5px;
+}
 
 /* Centered search wrapper */
 .header-search{

@@ -15,15 +15,14 @@ function Header() {
     }
 
     return (
-        // **БҮХ ИЛҮҮ DIV-Г УСТГАСАН**
         <header className="header">
-            {/* Left: logo */}
-            <Link to="/home" className="header-logo">
-                <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="36" height="36" rx="8" fill="#ef4444" />
-                    <path d="M9 10h5v16H9zM16 10h2v16h-2zM22 10c3.3 0 5 1.8 5 4s-1.7 4-5 4h-3v8h-2V10h5z" fill="white" />
-                </svg>
-                <span>menu</span>
+            <Link to="/restaurants" className="header-logo">
+                <img 
+                    src="/images/banners/logo.png" 
+                    alt="Bon Delice Logo" 
+                    className="custom-logo-img" 
+                />
+                <span className="logo-text">Bon Delice</span>
             </Link>
 
             {/* Center: search */}
