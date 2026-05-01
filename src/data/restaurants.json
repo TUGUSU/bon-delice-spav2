@@ -123,7 +123,7 @@
     },
     {
       "id": 5, "name": "Ger Kitchen", "emoji": "🏠",
-      "image": "", "imageAlt": "Ger Kitchen монгол хоол",
+      "image": "/images/restaurants/gerkitchen.jpg", "imageAlt": "Ger Kitchen монгол хоол",
       "rating": 4.4, "reviewCount": 71,
       "tags": ["Монгол"], "category": "mongolian",
       "distance": 1.2, "isOpen": true, "section": "popular",
@@ -303,7 +303,7 @@
     },
     {
       "id": 11, "name": "Steppe Bistro", "emoji": "🌿",
-      "image": "", "imageAlt": "Steppe Bistro монгол хоол",
+      "image": "/images/restaurants/steppe.jpg", "imageAlt": "Steppe Bistro монгол хоол",
       "rating": 2.8, "reviewCount": 12,
       "tags": ["Монгол"], "category": "mongolian",
       "distance": 6.2, "isOpen": false, "section": "new",
