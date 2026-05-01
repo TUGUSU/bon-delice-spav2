@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
-const RATING_OPTIONS = [ { value: "", label: "Бүгд" }, { value: "4.5-5.0", label: "4.5 – 5.0" }, { value: "4.0-4.5", label: "4.0 – 4.5" }, { value: "3.0-4.0", label: "3.0 – 4.0" }, ];
-const CUISINE_OPTIONS = [ { value: "", label: "Бүгд" }, { value: "korean", label: "Солонгос" }, { value: "italian", label: "Итали" }, { value: "mongolian", label: "Монгол" }, /* ... */ ];
+const RATING_OPTIONS = [ { value: "", label: "Үнэлгээ" }, { value: "4.5-5.0", label: "4.5 – 5.0" }, { value: "4.0-4.5", label: "4.0 – 4.5" }, { value: "3.5-4.0", label: "3.5 – 4.0" },  { value: "3.0-3.5", label: "3.0 – 3.5" } ];
+const CUISINE_OPTIONS = [ { value: "", label: "Үндэстний зоог" }, { value: "korean", label: "Солонгос" }, { value: "italian", label: "Итали" }, { value: "mongolian", label: "Монгол" }, { value: "chinese", label: "Хятад" }, { value: "vietnam", label: "Вьетнам" }, { value: "uzbek", label: "Узбек" }/* ... */ ];
 const TYPE_OPTIONS = [ { value: "all", label: "Бүгд" }, { value: "restaurant", label: "Ресторан" }, { value: "pub", label: "Паб" }, ];
 
 function Dropdown({ label, options, value, onChange, icon }) {
@@ -46,8 +46,8 @@ function FilterBar({ filters, onFilterChange }) {
                     ))}
                 </div>
                 <div className="filter-group-right">
-                    <Dropdown label="Үнэлгээ" icon="⭐" options={RATING_OPTIONS} value={filters.ratingFilter} onChange={(v) => onFilterChange("ratingFilter", v)} />
-                    <Dropdown label="Үндэстний зоог" icon="🍽️" options={CUISINE_OPTIONS} value={filters.cuisineFilter} onChange={(v) => onFilterChange("cuisineFilter", v)} />
+                    <Dropdown label="Үнэлгээ" options={RATING_OPTIONS} value={filters.ratingFilter} onChange={(v) => onFilterChange("ratingFilter", v)} />
+                    <Dropdown label="Үндэстний зоог" options={CUISINE_OPTIONS} value={filters.cuisineFilter} onChange={(v) => onFilterChange("cuisineFilter", v)} />
                 </div>
             </div>
         </div>

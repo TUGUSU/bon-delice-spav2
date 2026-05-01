@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 /**
  * Modal – reusable dialog
- * CS142: functional component, useEffect lifecycle for Escape key
  */
 function Modal({ isOpen, onClose, title, children, size }) {
   useEffect(() => {

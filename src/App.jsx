@@ -11,7 +11,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 function App() {
   return (
     <Routes>
-      {/* Бүх хуудсыг нэг MainLayout дотор байрлуулах нь хамгийн цэвэрхэн архитектур */}
+      {/* Бүх хуудсыг нэг MainLayout дотор байрлуулах */}
       <Route path="/" element={<MainLayout />}>
         <Route index element={<Navigate to="/home" replace />} />
         <Route path="home" element={<HomePage />} />

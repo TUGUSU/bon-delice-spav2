@@ -1,10 +1,7 @@
 import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
 import restaurantData from "../data/restaurants.json";
 
-/**
- * AppContext – global state store
- * CS142: Context API + useMemo + custom hook pattern
- */
+/** AppContext – global state store */
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
@@ -13,21 +10,21 @@ export function AppProvider({ children }) {
   const [reviews,     setReviews]     = useState({});      // { [id]: Review[] }
   const [toasts,      setToasts]      = useState([]);
 
-  /* ── Toast system ── */
+  /* Toast system*/
   const addToast = useCallback((message, type = "success") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 3200);
   }, []);
 
-  /* ── Favorites ── */
+  /* Favorites */
   const toggleFavorite = useCallback((id) => {
     setRestaurants((prev) =>
       prev.map((r) => (r.id === id ? { ...r, isFavorite: !r.isFavorite } : r))
     );
   }, []);
 
-  /* ── Reservations ── */
+  /*Reservations */
   const createOrder = useCallback((data) => {
     const order = {
       id:        Date.now(),
@@ -57,7 +54,7 @@ export function AppProvider({ children }) {
     );
   }, []);
 
-  /* ── Reviews ── */
+  /* Reviews */
   const addReview = useCallback((venueId, review) => {
     setReviews((prev) => ({
       ...prev,

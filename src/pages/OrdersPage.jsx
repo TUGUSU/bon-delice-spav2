@@ -3,16 +3,7 @@ import { Link } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 import Modal from "../components/common/Modal";
 
-/**
- * OrdersPage – table reservation history with modify + cancel
- *
- * CS142 pattern: functional component; useState for the edit modal's
- * local form state; cancelOrder + updateOrder dispatch to context.
- *
- * Sections:
- *   1. Upcoming (confirmed) — with Edit and Cancel actions
- *   2. History  (cancelled) — read-only display
- */
+/** OrdersPage – table reservation tvvh bolon tsag oorchloh bolon tsutslah*/
 
 const TIMES = [
   "11:00","12:00","13:00","14:00","15:00",
@@ -39,7 +30,7 @@ function OrdersPage() {
   function handleEditSave() {
     if (!editDate || !editTime) return;
     updateOrder(editTarget.id, { date: editDate, time: editTime });
-    addToast("Захиалга амжилттай шинэчлэгдлээ ✏️", "info");
+    addToast("Захиалга амжилттай шинэчлэгдлээ", "info");
     setEditTarget(null);
   }
 
@@ -65,7 +56,7 @@ function OrdersPage() {
 
       {orders.length === 0 ? (
         <div className="orders-empty">
-          <span className="empty-emoji">📋</span>
+          <span className="empty-emoji"></span>
           <p className="empty-title">Захиалга байхгүй байна</p>
           <p className="empty-sub">Ресторан дээр "Ширээ захиалах" товч дарна уу.</p>
           <Link to="/restaurants" className="btn btn-primary" style={{ marginTop: 16 }}>
@@ -131,7 +122,7 @@ function OrdersPage() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">📅 Шинэ огноо</label>
+              <label className="form-label"> Шинэ огноо</label>
               <input
                 type="date"
                 className="form-input"
@@ -142,7 +133,7 @@ function OrdersPage() {
             </div>
 
             <div className="form-group">
-              <label className="form-label">🕐 Шинэ цаг</label>
+              <label className="form-label"> Шинэ цаг</label>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 7 }}>
                 {TIMES.map((t) => (
                   <button
@@ -217,7 +208,7 @@ function OrderCard({ order, onEdit, onCancel, isCancelled }) {
         </span>
         {order.note && (
           <span className="order-meta-item" style={{ color: "var(--text-2)" }}>
-            📝 {order.note}
+             {order.note}
           </span>
         )}
       </div>
@@ -225,7 +216,7 @@ function OrderCard({ order, onEdit, onCancel, isCancelled }) {
       {!isCancelled && (
         <div className="order-actions">
           <button className="btn btn-outline btn-sm" onClick={onEdit}>
-            ✏️ Цаг өөрчлөх
+             Цаг өөрчлөх
           </button>
           <button
             className="btn btn-sm"

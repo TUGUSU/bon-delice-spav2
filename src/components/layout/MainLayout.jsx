@@ -1,7 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
-// Footer байгаа бол энд импортлоно
 
 function MainLayout() {
   return (
@@ -10,7 +9,6 @@ function MainLayout() {
       <main className="main-content">
         <Outlet />
       </main>
-      {/* <Footer /> */}
     </div>
   );
 }

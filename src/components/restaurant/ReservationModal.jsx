@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import Modal from "../common/Modal";
 import { useApp } from "../../context/AppContext";
 
-/**
- * ReservationModal – 3-step reservation flow
- * CS142: functional component, useState for multi-step form,
- *        controlled inputs, callback to context
- */
+/** ReservationModal – 3-step reservation flow*/
 
 const TIMES = [
   "11:00","12:00","13:00","14:00","15:00",
@@ -47,10 +43,10 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
     setDone(true);
   }
 
-  /* ── Today's date as min ── */
+  /* Today's date as min */
   const today = new Date().toISOString().split("T")[0];
 
-  /* ── Can proceed? ── */
+  /* Can proceed? */
   const canNext0 = date && time;
   const canNext1 = people >= 1;
 
@@ -59,7 +55,7 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
   return (
     <Modal isOpen={isOpen} onClose={handleClose} title="Ширээ захиалах">
       {done ? (
-        /* ── Confirmed state ── */
+        /* Confirmed state */
         <div className="res-confirmed anim-scale-in">
           <div className="check-icon">🎉</div>
           <h3>Баталгаажсан!</h3>
@@ -105,7 +101,7 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
             Алхам {step + 1} / {STEPS.length} — <strong>{STEPS[step]}</strong>
           </p>
 
-          {/* ── Step 0: Date & Time ── */}
+          {/* Step 0: Date & Time */}
           {step === 0 && (
             <div className="anim-fade-up">
               <div className="form-group">
@@ -144,7 +140,7 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
             </div>
           )}
 
-          {/* ── Step 1: People & Note ── */}
+          {/* Step 1: People & Note */}
           {step === 1 && (
             <div className="anim-fade-up">
               <div className="form-group">
@@ -165,7 +161,7 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
                 </div>
               </div>
               <div className="form-group">
-                <label className="form-label">📝 Тэмдэглэл (заавал биш)</label>
+                <label className="form-label"> Тэмдэглэл (заавал биш)</label>
                 <textarea
                   className="form-input form-textarea"
                   placeholder="Тусгай хүсэлт, тэмдэглэл..."
@@ -189,7 +185,7 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
             </div>
           )}
 
-          {/* ── Step 2: Confirm ── */}
+          {/* Step 2: Confirm */}
           {step === 2 && (
             <div className="anim-fade-up">
               <p style={{ fontSize: 13, color: "var(--text-3)", marginBottom: 14 }}>

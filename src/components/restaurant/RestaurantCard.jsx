@@ -1,14 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-/**
- * RestaurantCard – interactive card that navigates to detail on click
- *
- * CS142 pattern: functional component, props-driven with callbacks.
- * useNavigate for programmatic navigation — the entire card surface is
- * clickable via onClick on the <article>, while action buttons use
- * stopPropagation so they don't also trigger card navigation.
- */
+/** RestaurantCard – interactive card that navigates to detail on click */
 function RestaurantCard({ restaurant: r, onToggleFavorite, onReserve }) {
   const navigate = useNavigate();
 
@@ -37,7 +30,7 @@ function RestaurantCard({ restaurant: r, onToggleFavorite, onReserve }) {
       aria-label={`${r.name} дэлгэрэнгүй харах`}
       onKeyDown={(e) => e.key === "Enter" && goToDetail()}
     >
-      {/* ── Image area ── */}
+      {/* Image area */}
       <div className="rcard-img-wrap">
         {r.image
           ? <img className="rcard-img" src={r.image} alt={r.imageAlt} />
@@ -59,7 +52,7 @@ function RestaurantCard({ restaurant: r, onToggleFavorite, onReserve }) {
         </span>
       </div>
 
-      {/* ── Body ── */}
+      {/* Body */}
       <div className="rcard-body">
         <p className="rcard-name">{r.name}</p>
 

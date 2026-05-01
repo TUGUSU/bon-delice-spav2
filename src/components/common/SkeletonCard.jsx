@@ -1,8 +1,7 @@
 import React from "react";
 
 /**
- * SkeletonCard – loading placeholder
- * CS142: functional component
+ * SkeletonCard – loading placeholder(helps order or something....)
  */
 function SkeletonCard() {
   return (

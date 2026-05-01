@@ -4,19 +4,12 @@ import { useApp } from "../context/AppContext";
 import RestaurantCard from "../components/restaurant/RestaurantCard";
 import ReservationModal from "../components/restaurant/ReservationModal";
 
-/**
- * FavoritesPage – grid of saved restaurants
- *
- * CS142 pattern: functional component; derived state computed inline
- * (restaurants filtered by isFavorite) — no extra useState needed.
- * Removing a favourite from this page is handled by toggleFavorite
- * from context, which triggers a re-render and the item disappears.
- */
+/* FavoritesPage – grid of saved restaurants */
 function FavoritesPage() {
   const { restaurants, toggleFavorite } = useApp();
   const [reserveTarget, setReserveTarget] = useState(null);
 
-  /* Derived: only restaurants the user has hearted */
+  /* fav darsan restaurant uud */
   const favorites = restaurants.filter((r) => r.isFavorite);
 
   return (

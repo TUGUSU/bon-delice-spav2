@@ -2,10 +2,7 @@ import React, { useState } from "react";
 import Modal from "../common/Modal";
 import { useApp } from "../../context/AppContext";
 
-/**
- * ReviewModal – write a review with star rating
- * CS142: functional component, controlled form state
- */
+/** ReviewModal – write a review with star rating*/
 function ReviewModal({ restaurant, isOpen, onClose }) {
   const { addReview, addToast } = useApp();
   const [author,  setAuthor]  = useState("");

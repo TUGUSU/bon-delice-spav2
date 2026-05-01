@@ -46,7 +46,7 @@ function UnderDevelopmentMessage({ type }) {
             <span className="empty-emoji" style={{ fontSize: '4rem' }}>{emoji}</span>
             <h1 className="page-title" style={{ marginTop: '1rem', marginBottom: '0.5rem' }}>{title}</h1>
             <p className="empty-title">Уучлаарай, энэ хэсэг одоогоор хийгдэж байна.</p>
-            <p className="empty-sub">Та "Бүгд" эсвэл "Ресторан" товчийг дарж буцаж болно.</p>
+            <p className="empty-sub">Та "Ресторан"-аас өөрийн дуртай газараа сонгон захиална уу.</p>
         </div>
     );
 }
@@ -101,7 +101,7 @@ function RestaurantsPage() {
 
     return (
         <>
-            {/* 1. FILTERBAR ҮРГЭЛЖ ХАРАГДАНА */}
+            {/* FILTERBAR */}
             <FilterBar onFilterChange={handleFilterChange} filters={filters} />
             
             <div className="page-wrap">
@@ -112,7 +112,7 @@ function RestaurantsPage() {
                 
                 {!isUnavailableType && <ActiveFiltersDisplay filters={filters} onClearFilter={handleClearFilter} onClearAll={handleClearAll} />}
 
-                {/* 2. ЗӨВХӨН ДООРХ КОНТЕНТ НӨХЦЛӨӨС ХАМААРЧ СОЛИГДОНО */}
+                {/* ЗӨВХӨН ДООРХ КОНТЕНТ НӨХЦЛӨӨС ХАМААРЧ СОЛИГДОНО */}
                 <div className="cards-grid">
                     {isUnavailableType ? (
                         // "Pub" эсвэл "Karaoke" бол мессеж харуулах

@@ -4,24 +4,9 @@ import { useApp } from "../context/AppContext";
 import ReservationModal from "../components/restaurant/ReservationModal";
 import ReviewModal from "../components/restaurant/ReviewModal";
 
-/**
- * RestaurantDetailPage – two-column detail view
- *
- * CS142 pattern: functional component, useParams to extract :id,
- * useState for modal visibility. No tabs — single "Тухай" view.
- *
- * Layout (desktop):
- *   Left  (60%) – hero image + about info block (Тухай)
- *   Right (40%) – sticky panel: identity summary + reservation CTA
- *                 + inline review list with "write review" button
- *
- * On mobile: stacks vertically (right panel moves below hero).
- *
- * Note: ReservationModal and ReviewModal are kept exactly as-is
- * per spec — no changes to booking or review logic.
- */
+/** RestaurantDetailPage – two-column detail haragdats*/
 
-/** Renders n filled stars and (5-n) empty stars */
+/** Renders ddvrdeg od bolon (5-n) hooson od */
 function StarRow({ rating, size = 14 }) {
   const full  = Math.round(rating);
   const empty = 5 - full;
@@ -65,15 +50,15 @@ function RestaurantDetailPage() {
     <>
       <div className="page-wrap detail-page-wrap">
 
-        {/* ── Back link ── */}
+        {/* Back link  */}
         <Link to="/restaurants" className="detail-back-link">
           ← Буцах
         </Link>
 
-        {/* ══ Title ══ */}
+        {/*  Title */}
         <h1 className="detail-name detail-name-heading">{restaurant.name}</h1>
 
-        {/* ══ Rating Row ══ */}
+        {/*  Rating Row  */}
         <div className="detail-rating-wrap">
           <StarRow rating={avgRating} size={18} />
           <span className="detail-rating-value">{avgRating.toFixed(1)}</span>
@@ -87,7 +72,7 @@ function RestaurantDetailPage() {
           ))}
         </div>
 
-        {/* ══ Hero Image Section ══ */}
+        {/* Hero Image Section */}
         <div className="detail-hero-image">
           {restaurant.image
             ? <img src={restaurant.image} alt={restaurant.imageAlt} />
@@ -95,7 +80,7 @@ function RestaurantDetailPage() {
           }
         </div>
 
-        {/* ══ Restaurant Card Section ══ */}
+        {/* Restaurant Card Section */}
         <div className="detail-card">
           {/* LEFT: Profile Picture */}
           <div className="detail-card-profile">
@@ -111,7 +96,7 @@ function RestaurantDetailPage() {
               className="btn btn-primary detail-card-btn-reserve"
               onClick={() => setReserveOpen(true)}
             >
-              🪑 ШИРЭЭ ЗАХИАЛАХ
+               ШИРЭЭ ЗАХИАЛАХ
             </button>
             <button
               className="btn btn-outline btn-save detail-card-btn-save"
@@ -123,7 +108,7 @@ function RestaurantDetailPage() {
           </div>
         </div>
 
-        {/* ══ Info Grid: Address, Phone, Hours ══ */}
+        {/*  Info Grid: Address, Phone, Hours  */}
         <div className="detail-info-grid">
           {/* Address */}
           <div className="detail-info-item">
@@ -139,7 +124,7 @@ function RestaurantDetailPage() {
 
           {/* Hours */}
           <div className="detail-info-item">
-            <h4>🕐 Ажиллах цаг</h4>
+            <h4> Ажиллах цаг</h4>
             <p>
               {restaurant.isOpen ? (
                 <span className="detail-status-open">Нээлттэй</span>
@@ -151,14 +136,14 @@ function RestaurantDetailPage() {
           </div>
         </div>
 
-        {/* ══ About Section ══ */}
+        {/*  About Section */}
         <div className="detail-section">
           <h2 className="detail-section-title">Дэлгэрэнгүй</h2>
           <p className="detail-section-text">
             {restaurant.description}
           </p>
         </div>
-{/* ══ Location Section with Map ══ */}
+{/* Location Section with Map */}
         {restaurant.mapEmbed && (
           <div className="detail-location-wrap">
             <h2 className="detail-section-title">Байршил</h2>
@@ -171,7 +156,7 @@ function RestaurantDetailPage() {
             ></iframe>
           </div>
         )}
-        {/* ══ Reviews Section ══ */}
+        {/* Reviews Section  */}
         <div className="detail-reviews-wrap">
           <div className="detail-reviews-header">
             <h2 className="detail-reviews-title">
