@@ -8,7 +8,7 @@ const BANNERS = [
   { 
     title: "Шилдэг рестораны\nтаны хажууд", 
     sub: "Улаанбаатарын шилдэг 200+ газар", 
-    bg: "url('/images/banners/hero-main.jpg') center/cover no-repeat" 
+    bg: "url('/images/banners/hero-newplace.jpg') center/cover no-repeat" 
   },
   { 
     title: "Ширээ захиалаарай\nхялбархан", 
@@ -18,15 +18,14 @@ const BANNERS = [
   { 
     title: "Шинэ газрууд\nнэмэгдлээ", 
     sub: "Долоо хоног бүр шинэ сонголт", 
-    bg: "url('/images/banners/hero-newplace.jpg') center/cover no-repeat" 
+    bg: "url('/images/banners/hero-main.jpg') center/cover no-repeat" 
   },
 ];
 
-// **ХАМГИЙН ЧУХАЛ ЗАСВАР: Файлын нэрийг яг таг тааруулсан**
 const CATS = [
   { 
     label: "Ресторан", 
-    image: "/images/banners/restaurant.jpg", // <-- Энэ зургийг та "res.jpg" гэж нэрлэсэн байж магадгүй, шалгаарай
+    image: "/images/banners/restaurant.jpg", 
     path: "/restaurants",
     tall: true
   },
@@ -68,7 +67,7 @@ function HomePage() {
           </div>
         </div>
 
-        {/* Category grid (Зурагтай болгосон) */}
+        {/* Category grid */}
         <div className="cat-grid" style={{ marginBottom: 28 }}>
           
           <Link to={CATS[0].path} className="cat-card tall">
