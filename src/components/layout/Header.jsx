@@ -1,31 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { CalendarDays, Heart, LogOut, Menu, X } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 
 function Header() {
     const [q, setQ] = useState("");
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef(null);
     const navigate = useNavigate();
     const { restaurants, orders } = useApp();
     const favCount = restaurants.filter((r) => r.isFavorite).length;
     const ordersCount = orders.filter((o) => o.status === "confirmed").length;
 
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if (menuRef.current && !menuRef.current.contains(e.target)) {
+                setMenuOpen(false);
+            }
+        }
+
+        function handleEscape(e) {
+            if (e.key === "Escape") setMenuOpen(false);
+        }
+
+        document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleEscape);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleEscape);
+        };
+    }, []);
+
     function onSubmit(e) {
         e.preventDefault();
-        if (q.trim()) navigate(`/restaurants?q=${encodeURIComponent(q.trim())}`);
+        if (q.trim()) {
+            navigate(`/restaurants?q=${encodeURIComponent(q.trim())}`);
+            setMenuOpen(false);
+        }
+    }
+
+    function handleLogout() {
+        setMenuOpen(false);
+        navigate("/home");
     }
 
     return (
         <header className="header">
             <Link to="/home" className="header-logo">
-                <img 
-                    src="/images/banners/logo.png" 
-                    alt="Bon Delice Logo" 
-                    className="custom-logo-img" 
+                <img
+                    src="/images/banners/logo.png"
+                    alt="Bon Delice Logo"
+                    className="custom-logo-img"
                 />
                 <span className="logo-text">Bon Delice</span>
             </Link>
 
-            {/* Center: search */}
             <form className="header-search" onSubmit={onSubmit}>
                 <input
                     type="text"
@@ -41,26 +71,64 @@ function Header() {
                 </button>
             </form>
 
-            {/* Right: navigation links */}
-            <nav className="header-nav">
-                <NavLink to="/favorites" className={({ isActive }) => `header-nav-link${isActive ? " active" : ""}`}>
-                    <span className="header-nav-icon-wrap">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-                        </svg>
-                        {favCount > 0 && <span className="nav-badge">{favCount}</span>}
-                    </span>
-                    <span className="header-nav-label">Хадгалсан</span>
-                </NavLink>
-                <NavLink to="/orders" className={({ isActive }) => `header-nav-link${isActive ? " active" : ""}`}>
-                    <span className="header-nav-icon-wrap">
-                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z" />
-                        </svg>
-                        {ordersCount > 0 && <span className="nav-badge">{ordersCount}</span>}
-                    </span>
-                    <span className="header-nav-label">Захиалга</span>
-                </NavLink>
+            <nav className="header-nav" ref={menuRef} aria-label="Хэрэглэгчийн цэс">
+                <button
+                    type="button"
+                    className={`header-menu-btn${menuOpen ? " active" : ""}`}
+                    onClick={() => setMenuOpen((open) => !open)}
+                    aria-label={menuOpen ? "Цэс хаах" : "Цэс нээх"}
+                    aria-expanded={menuOpen}
+                    aria-controls="header-slide-menu"
+                >
+                    {menuOpen ? <X size={22} /> : <Menu size={22} />}
+                    {(favCount > 0 || ordersCount > 0) && (
+                        <span className="header-menu-alert">{favCount + ordersCount}</span>
+                    )}
+                </button>
+
+                <div
+                    id="header-slide-menu"
+                    className={`header-menu-panel${menuOpen ? " open" : ""}`}
+                    aria-hidden={!menuOpen}
+                >
+                    <NavLink
+                        to="/favorites"
+                        className={({ isActive }) => `header-menu-link${isActive ? " active" : ""}`}
+                        onClick={() => setMenuOpen(false)}
+                        tabIndex={menuOpen ? 0 : -1}
+                    >
+                        <span className="header-menu-icon-wrap">
+                            <Heart size={19} />
+                            {favCount > 0 && <span className="nav-badge">{favCount}</span>}
+                        </span>
+                        <span>Хадгалсан</span>
+                    </NavLink>
+
+                    <NavLink
+                        to="/orders"
+                        className={({ isActive }) => `header-menu-link${isActive ? " active" : ""}`}
+                        onClick={() => setMenuOpen(false)}
+                        tabIndex={menuOpen ? 0 : -1}
+                    >
+                        <span className="header-menu-icon-wrap">
+                            <CalendarDays size={19} />
+                            {ordersCount > 0 && <span className="nav-badge">{ordersCount}</span>}
+                        </span>
+                        <span>Захиалга</span>
+                    </NavLink>
+
+                    <div className="header-menu-divider" />
+
+                    <button
+                        type="button"
+                        className="header-menu-link header-menu-logout"
+                        onClick={handleLogout}
+                        tabIndex={menuOpen ? 0 : -1}
+                    >
+                        <LogOut size={19} />
+                        <span>Гарах</span>
+                    </button>
+                </div>
             </nav>
         </header>
     );
