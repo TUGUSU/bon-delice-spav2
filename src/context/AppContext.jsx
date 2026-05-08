@@ -100,6 +100,16 @@ export function AppProvider({ children }) {
   }, []);
 
   /* Auth */
+  const buildAuthenticatorCode = useCallback((secret, atMs = Date.now()) => {
+    const timeStep = Math.floor(atMs / 30000);
+    const seed = `${secret}:${timeStep}`;
+    let hash = 0;
+    for (let i = 0; i < seed.length; i += 1) {
+      hash = (hash * 31 + seed.charCodeAt(i)) % 1000000;
+    }
+    return String(Math.abs(hash)).padStart(6, "0");
+  }, []);
+
   const registerUser = useCallback(
     ({ fullName, email, password }) => {
       const normalizedEmail = email.trim().toLowerCase();
@@ -115,6 +125,7 @@ export function AppProvider({ children }) {
         fullName: fullName.trim(),
         email: normalizedEmail,
         password,
+        authenticatorSecret: `bd-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
         createdAt: new Date().toISOString(),
       };
 
@@ -126,7 +137,7 @@ export function AppProvider({ children }) {
   );
 
   const loginUser = useCallback(
-    ({ email, password }) => {
+    ({ email, password, authenticatorCode }) => {
       const normalizedEmail = email.trim().toLowerCase();
       const foundUser = users.find(
         (u) => u.email === normalizedEmail && u.password === password
@@ -134,6 +145,35 @@ export function AppProvider({ children }) {
       if (!foundUser) {
         return { ok: false, message: "И-мэйл эсвэл нууц үг буруу байна." };
       }
+
+      // Backward compatibility: old accounts might not have a secret yet.
+      const activeSecret =
+        foundUser.authenticatorSecret ||
+        `bd-${foundUser.id}-${Math.random().toString(36).slice(2, 8)}`;
+      if (!foundUser.authenticatorSecret) {
+        setUsers((prev) =>
+          prev.map((u) =>
+            u.id === foundUser.id ? { ...u, authenticatorSecret: activeSecret } : u
+          )
+        );
+      }
+
+      if (!authenticatorCode) {
+        return {
+          ok: false,
+          requiresAuthenticator: true,
+          message: "Authenticator кодоо оруулна уу.",
+        };
+      }
+
+      const nowCode = buildAuthenticatorCode(activeSecret, Date.now());
+      const prevCode = buildAuthenticatorCode(activeSecret, Date.now() - 30000);
+      const nextCode = buildAuthenticatorCode(activeSecret, Date.now() + 30000);
+      const normalizedCode = String(authenticatorCode).trim();
+      if (![nowCode, prevCode, nextCode].includes(normalizedCode)) {
+        return { ok: false, message: "Authenticator код буруу байна." };
+      }
+
       setCurrentUser({
         id: foundUser.id,
         fullName: foundUser.fullName,
@@ -141,7 +181,17 @@ export function AppProvider({ children }) {
       });
       return { ok: true, user: foundUser };
     },
-    [users]
+    [users, buildAuthenticatorCode]
+  );
+
+  const getDemoAuthenticatorCode = useCallback(
+    (email) => {
+      const normalizedEmail = email.trim().toLowerCase();
+      const foundUser = users.find((u) => u.email === normalizedEmail);
+      if (!foundUser) return null;
+      return buildAuthenticatorCode(foundUser.authenticatorSecret);
+    },
+    [users, buildAuthenticatorCode]
   );
 
   const updateProfile = useCallback(
@@ -195,12 +245,13 @@ export function AppProvider({ children }) {
       currentUser,
       registerUser,
       loginUser,
+      getDemoAuthenticatorCode,
       updateProfile,
       logoutUser,
     }),
     [restaurants, orders, reviews, toasts,
      toggleFavorite, createOrder, cancelOrder, updateOrder, addReview, addToast,
-     users, currentUser, registerUser, loginUser, updateProfile, logoutUser]
+     users, currentUser, registerUser, loginUser, getDemoAuthenticatorCode, updateProfile, logoutUser]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

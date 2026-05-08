@@ -5,15 +5,26 @@ import { useApp } from "../context/AppContext";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { loginUser, addToast } = useApp();
+  const { loginUser, getDemoAuthenticatorCode, addToast } = useApp();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [authenticatorCode, setAuthenticatorCode] = useState("");
+  const [authStep, setAuthStep] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
   function handleSubmit(e) {
     e.preventDefault();
-    const result = loginUser({ email, password });
+    const result = loginUser({ email, password, authenticatorCode });
     if (!result.ok) {
+      if (result.requiresAuthenticator) {
+        setAuthStep(true);
+        addToast("Authenticator кодоо оруулна уу.", "info");
+        const code = getDemoAuthenticatorCode(email);
+        if (code) {
+          window.alert(`Demo Authenticator код: ${code}`);
+        }
+        return;
+      }
       addToast(result.message, "error");
       return;
     }
@@ -55,6 +66,7 @@ function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="И-мэйл"
                 autoComplete="email"
+                disabled={authStep}
               />
               <Mail size={16} />
             </div>
@@ -69,10 +81,27 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Нууц үг"
                 autoComplete="current-password"
+                disabled={authStep}
               />
               <EyeOff size={16} />
             </div>
           </label>
+
+          {authStep && (
+            <label className="login-field">
+              <span className="login-field-label">Authenticator код</span>
+              <div className="login-input-wrap">
+                <input
+                  type="text"
+                  value={authenticatorCode}
+                  onChange={(e) => setAuthenticatorCode(e.target.value)}
+                  placeholder="6 оронтой код"
+                  inputMode="numeric"
+                  maxLength={6}
+                />
+              </div>
+            </label>
+          )}
 
           <div className="login-row">
             <label className="login-remember">
@@ -84,13 +113,30 @@ function LoginPage() {
               <span>Намайг сана</span>
             </label>
 
-            <Link className="login-forgot" to="/login">
-              Нууц үгээ мартсан уу?
-            </Link>
+            {!authStep ? (
+              <Link className="login-forgot" to="/login">
+                Нууц үгээ мартсан уу?
+              </Link>
+            ) : (
+              <button
+                type="button"
+                className="login-forgot"
+                onClick={() => {
+                  const code = getDemoAuthenticatorCode(email);
+                  if (!code) {
+                    addToast("Энэ и-мэйлээр хэрэглэгч олдсонгүй.", "error");
+                    return;
+                  }
+                  window.alert(`Demo Authenticator код: ${code}`);
+                }}
+              >
+                Demo код харах
+              </button>
+            )}
           </div>
 
           <button type="submit" className="login-submit">
-            Нэвтрэх
+            {authStep ? "Кодоор баталгаажуулж нэвтрэх" : "Нэвтрэх"}
           </button>
         </form>
 
