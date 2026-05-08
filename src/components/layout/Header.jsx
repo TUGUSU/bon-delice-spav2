@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { CalendarDays, Heart, LogOut, Menu, X } from "lucide-react";
+import { CalendarDays, Heart, LogOut, Menu, User, X } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContext";
 
@@ -8,7 +8,7 @@ function Header() {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
     const navigate = useNavigate();
-    const { restaurants, orders } = useApp();
+    const { restaurants, orders, currentUser, logoutUser } = useApp();
     const favCount = restaurants.filter((r) => r.isFavorite).length;
     const ordersCount = orders.filter((o) => o.status === "confirmed").length;
 
@@ -41,8 +41,9 @@ function Header() {
     }
 
     function handleLogout() {
+        logoutUser();
         setMenuOpen(false);
-        navigate("/home");
+        navigate("/login");
     }
 
     return (
@@ -91,6 +92,32 @@ function Header() {
                     className={`header-menu-panel${menuOpen ? " open" : ""}`}
                     aria-hidden={!menuOpen}
                 >
+                    {currentUser ? (
+                        <NavLink
+                            to="/profile"
+                            className={({ isActive }) => `header-menu-link${isActive ? " active" : ""}`}
+                            onClick={() => setMenuOpen(false)}
+                            tabIndex={menuOpen ? 0 : -1}
+                        >
+                            <span className="header-menu-icon-wrap">
+                                <User size={19} />
+                            </span>
+                            <span>Профайл</span>
+                        </NavLink>
+                    ) : (
+                        <NavLink
+                            to="/login"
+                            className={({ isActive }) => `header-menu-link${isActive ? " active" : ""}`}
+                            onClick={() => setMenuOpen(false)}
+                            tabIndex={menuOpen ? 0 : -1}
+                        >
+                            <span className="header-menu-icon-wrap">
+                                <User size={19} />
+                            </span>
+                            <span>Нэвтрэх</span>
+                        </NavLink>
+                    )}
+
                     <NavLink
                         to="/favorites"
                         className={({ isActive }) => `header-menu-link${isActive ? " active" : ""}`}
@@ -117,17 +144,21 @@ function Header() {
                         <span>Захиалга</span>
                     </NavLink>
 
-                    <div className="header-menu-divider" />
+                    {currentUser && (
+                        <>
+                            <div className="header-menu-divider" />
 
-                    <button
-                        type="button"
-                        className="header-menu-link header-menu-logout"
-                        onClick={handleLogout}
-                        tabIndex={menuOpen ? 0 : -1}
-                    >
-                        <LogOut size={19} />
-                        <span>Гарах</span>
-                    </button>
+                            <button
+                                type="button"
+                                className="header-menu-link header-menu-logout"
+                                onClick={handleLogout}
+                                tabIndex={menuOpen ? 0 : -1}
+                            >
+                                <LogOut size={19} />
+                                <span>Гарах</span>
+                            </button>
+                        </>
+                    )}
                 </div>
             </nav>
         </header>
