@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 const apiBaseUrl = (process.env.API_BASE_URL || "/api").replace(/\/$/, "") || "/api";
+const demoAuth =
+  process.env.DEMO_AUTH === "true" || process.env.DEMO_AUTH === "1";
 
 const apiPort = parseInt(process.env.PORT || "4000", 10);
 const apiProxyTarget =
@@ -41,6 +43,7 @@ module.exports = {
   plugins: [
     new webpack.DefinePlugin({
       "process.env.API_BASE_URL": JSON.stringify(apiBaseUrl),
+      "process.env.DEMO_AUTH": JSON.stringify(demoAuth),
     }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",

@@ -2,6 +2,9 @@
   command = "node scripts/netlify-redirects.js && npm run build"
   publish = "dist"
 
+[build.environment]
+  DEMO_AUTH = "true"
+
 # NETLIFY_API_URL (Site settings → Environment variables):
 #   https://YOUR-EXPRESS-API.onrender.com
 # Deploy server/ + MongoDB Atlas first; set CORS_ORIGIN on the API to include:

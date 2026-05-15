@@ -1948,3 +1948,71 @@
   font-size: 13px;
   color: #4b5563;
 }
+
+.demo-auth-banner {
+  margin: 12px 0 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: #fff8e6;
+  border: 1px solid #f0d78c;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.demo-auth-banner-title {
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: #7c5e10;
+}
+
+.demo-auth-banner-text {
+  margin: 0 0 8px;
+  color: #5c4a1a;
+}
+
+.demo-auth-creds {
+  margin: 0;
+  padding-left: 18px;
+  color: #3d3420;
+}
+
+.demo-auth-creds code {
+  font-size: 12px;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 1px 4px;
+  border-radius: 4px;
+}
+
+.demo-auth-role {
+  color: #6b7280;
+  font-size: 12px;
+}
+
+.demo-auth-quick {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.demo-auth-quick-btn {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px dashed #c9a227;
+  background: #fffdf5;
+  font-size: 13px;
+  color: #5c4a1a;
+  cursor: pointer;
+}
+
+.demo-auth-quick-btn:hover {
+  background: #fff6d6;
+}
+
+.demo-auth-hint {
+  font-size: 12px;
+  color: #6b7280;
+  margin: 0 0 12px;
+  text-align: center;
+}
