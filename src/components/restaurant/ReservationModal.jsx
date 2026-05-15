@@ -32,15 +32,22 @@ function ReservationModal({ restaurant, isOpen, onClose }) {
   function handleNext() { if (step < 2) setStep((s) => s + 1); }
   function handleBack() { if (step > 0) setStep((s) => s - 1); }
 
-  function handleConfirm() {
-    createOrder({
-      venueId:   restaurant.id,
-      venueName: restaurant.name,
-      venueImg:  restaurant.emoji,
-      date, time, people, note,
-    });
-    addToast(`${restaurant.name} ширээ амжилттай захиалагдлаа! 🎉`, "success");
-    setDone(true);
+  async function handleConfirm() {
+    try {
+      await createOrder({
+        venueId: restaurant.id,
+        venueName: restaurant.name,
+        venueImg: restaurant.emoji,
+        date,
+        time,
+        people,
+        note,
+      });
+      addToast(`${restaurant.name} ширээ амжилттай захиалагдлаа! 🎉`, "success");
+      setDone(true);
+    } catch (err) {
+      addToast(err.message || "Захиалга үүсгэж чадсангүй.", "error");
+    }
   }
 
   /* Today's date as min */

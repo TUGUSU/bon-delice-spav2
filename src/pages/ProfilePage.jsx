@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Mail, UserRound } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
@@ -10,18 +10,25 @@ function ProfilePage() {
   const [fullName, setFullName] = useState(currentUser?.fullName || "");
   const [email, setEmail] = useState(currentUser?.email || "");
 
+  useEffect(() => {
+    if (currentUser) {
+      setFullName(currentUser.fullName || "");
+      setEmail(currentUser.email || "");
+    }
+  }, [currentUser]);
+
   if (!currentUser) {
     navigate("/login");
     return null;
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
     if (!fullName.trim()) {
       addToast("Овог, нэрээ оруулна уу.", "error");
       return;
     }
-    const result = updateProfile({ fullName, email });
+    const result = await updateProfile({ fullName, email });
     if (!result.ok) {
       addToast(result.message, "error");
       return;
@@ -42,7 +49,10 @@ function ProfilePage() {
           </div>
           <div className="profile-header-text">
             <div className="profile-name">{currentUser.fullName || "Хэрэглэгч"}</div>
-            <div className="profile-email">{currentUser.email}</div>
+            <div className="profile-email">
+              @{currentUser.username}
+              {currentUser.email ? ` · ${currentUser.email}` : ""}
+            </div>
           </div>
           <button className="profile-settings-btn" aria-label="Тохиргоо">
             ⚙
@@ -86,4 +96,3 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
-

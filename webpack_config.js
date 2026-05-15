@@ -1,6 +1,11 @@
 const path = require("path");
+require("dotenv").config({ path: path.join(__dirname, ".env") });
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+
+const apiPort = parseInt(process.env.PORT || "4000", 10);
+const apiProxyTarget =
+  process.env.API_PROXY_TARGET || `http://127.0.0.1:${apiPort}`;
 
 module.exports = {
   entry: "./src/main.jsx",
@@ -54,5 +59,12 @@ module.exports = {
     open: true,
     hot: true,
     historyApiFallback: true,
+    proxy: [
+      {
+        context: ["/api"],
+        target: apiProxyTarget,
+        changeOrigin: true,
+      },
+    ],
   },
 };

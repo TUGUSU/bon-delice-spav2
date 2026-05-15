@@ -7,84 +7,104 @@ import React, {
   useState,
 } from "react";
 import restaurantData from "../data/restaurants.json";
+import { apiDelete, apiGet, apiPatch, apiPost } from "../api/client";
 
 /** AppContext – global state store */
 const AppContext = createContext(null);
 
+const PASSWORD_RULE =
+  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9]).{8,}$/;
+
+function validatePasswordClient(plain) {
+  if (typeof plain !== "string" || plain.length < 8) {
+    return "Нууц үг хамгийн багадаа 8 тэмдэгт, том жижиг үсэг, тоо, тусгай тэмдэгт агуулна.";
+  }
+  if (!PASSWORD_RULE.test(plain)) {
+    return "Нууц үг: дор хаяж 8 тэмдэгт, том үсэг, жижиг үсэг, тоо, тусгай тэмдэгт шаардлагатай.";
+  }
+  return null;
+}
+
 export function AppProvider({ children }) {
   const [restaurants, setRestaurants] = useState(restaurantData.restaurants);
-  const [orders,      setOrders]      = useState([]);
-  const [reviews,     setReviews]     = useState({});      // { [id]: Review[] }
-  const [toasts,      setToasts]      = useState([]);
-  const [users,       setUsers]       = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [reviews, setReviews] = useState({});
+  const [toasts, setToasts] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
 
-  useEffect(() => {
+  const refreshOrders = useCallback(async () => {
     try {
-      const savedUsers = JSON.parse(localStorage.getItem("bon_delice_users") || "[]");
-      const savedCurrentUser = JSON.parse(
-        localStorage.getItem("bon_delice_current_user") || "null"
-      );
-      if (Array.isArray(savedUsers)) setUsers(savedUsers);
-      if (savedCurrentUser) setCurrentUser(savedCurrentUser);
+      const data = await apiGet("/orders");
+      setOrders(data.orders || []);
     } catch {
-      // Ignore malformed local storage values.
+      setOrders([]);
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("bon_delice_users", JSON.stringify(users));
-  }, [users]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const data = await apiGet("/auth/me");
+        if (!cancelled && data.user) {
+          setCurrentUser(data.user);
+          await refreshOrders();
+        }
+      } catch {
+        if (!cancelled) {
+          setCurrentUser(null);
+          setOrders([]);
+        }
+      } finally {
+        if (!cancelled) setAuthLoading(false);
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [refreshOrders]);
 
-  useEffect(() => {
-    localStorage.setItem("bon_delice_current_user", JSON.stringify(currentUser));
-  }, [currentUser]);
-
-  /* Toast system*/
   const addToast = useCallback((message, type = "success") => {
     const id = Date.now();
     setToasts((prev) => [...prev, { id, message, type }]);
     setTimeout(() => setToasts((prev) => prev.filter((t) => t.id !== id)), 3200);
   }, []);
 
-  /* Favorites */
   const toggleFavorite = useCallback((id) => {
     setRestaurants((prev) =>
       prev.map((r) => (r.id === id ? { ...r, isFavorite: !r.isFavorite } : r))
     );
   }, []);
 
-  /*Reservations */
-  const createOrder = useCallback((data) => {
-    const order = {
-      id:        Date.now(),
-      venueId:   data.venueId,
-      venueName: data.venueName,
-      venueImg:  data.venueImg,
-      date:      data.date,
-      time:      data.time,
-      people:    data.people,
-      note:      data.note || "",
-      status:    "confirmed",
-      createdAt: new Date().toLocaleString("mn-MN"),
-    };
-    setOrders((prev) => [order, ...prev]);
-    return order;
+  const createOrder = useCallback(
+    async (data) => {
+      const payload = {
+        venueId: data.venueId,
+        venueName: data.venueName,
+        venueImg: data.venueImg,
+        date: data.date,
+        time: data.time,
+        people: data.people,
+        note: data.note || "",
+      };
+      const { order } = await apiPost("/orders", payload);
+      setOrders((prev) => [order, ...prev]);
+      return order;
+    },
+    []
+  );
+
+  const cancelOrder = useCallback(async (orderId) => {
+    const { order } = await apiDelete(`/orders/${orderId}`);
+    setOrders((prev) => prev.map((o) => (o.id === order.id ? order : o)));
   }, []);
 
-  const cancelOrder = useCallback((orderId) => {
-    setOrders((prev) =>
-      prev.map((o) => (o.id === orderId ? { ...o, status: "cancelled" } : o))
-    );
+  const updateOrder = useCallback(async (orderId, changes) => {
+    const { order } = await apiPatch(`/orders/${orderId}`, changes);
+    setOrders((prev) => prev.map((o) => (o.id === order.id ? order : o)));
   }, []);
 
-  const updateOrder = useCallback((orderId, changes) => {
-    setOrders((prev) =>
-      prev.map((o) => (o.id === orderId ? { ...o, ...changes } : o))
-    );
-  }, []);
-
-  /* Reviews */
   const addReview = useCallback((venueId, review) => {
     setReviews((prev) => ({
       ...prev,
@@ -92,141 +112,87 @@ export function AppProvider({ children }) {
     }));
     setRestaurants((prev) =>
       prev.map((r) =>
-        r.id === venueId
-          ? { ...r, reviewCount: r.reviewCount + 1 }
-          : r
+        r.id === venueId ? { ...r, reviewCount: r.reviewCount + 1 } : r
       )
     );
   }, []);
 
-  /* Auth */
-  const buildAuthenticatorCode = useCallback((secret, atMs = Date.now()) => {
-    const timeStep = Math.floor(atMs / 30000);
-    const seed = `${secret}:${timeStep}`;
-    let hash = 0;
-    for (let i = 0; i < seed.length; i += 1) {
-      hash = (hash * 31 + seed.charCodeAt(i)) % 1000000;
+  const registerUser = useCallback(async ({ username, fullName, email, password }) => {
+    const u = String(username || "").trim();
+    if (!u) {
+      return { ok: false, message: "Хэрэглэгчийн нэрээ оруулна уу." };
     }
-    return String(Math.abs(hash)).padStart(6, "0");
+    const pwdErr = validatePasswordClient(password);
+    if (pwdErr) {
+      return { ok: false, message: pwdErr };
+    }
+    try {
+      const data = await apiPost("/auth/register", {
+        username: u,
+        fullName: String(fullName || "").trim(),
+        email: String(email || "").trim(),
+        password,
+      });
+      if (!data.user) {
+        return { ok: false, message: "Бүртгэлийн хариу буруу байна." };
+      }
+      setCurrentUser(null);
+      setOrders([]);
+      return { ok: true, user: data.user };
+    } catch (err) {
+      return {
+        ok: false,
+        message: err.message || "Бүртгэл амжилтгүй.",
+        status: err.status,
+      };
+    }
   }, []);
 
-  const registerUser = useCallback(
-    ({ fullName, email, password }) => {
-      const normalizedEmail = email.trim().toLowerCase();
-      if (!normalizedEmail) {
-        return { ok: false, message: "И-мэйл заавал оруулна уу." };
+  const loginUser = useCallback(async ({ username, password }) => {
+    const u = String(username || "").trim().toLowerCase();
+    if (!u) {
+      return { ok: false, message: "Хэрэглэгчийн нэрээ оруулна уу." };
+    }
+    try {
+      const data = await apiPost("/auth/login", { username: u, password });
+      if (!data.user) {
+        return { ok: false, message: "Нэвтрэлтийн хариу буруу байна." };
       }
-      if (users.some((u) => u.email === normalizedEmail)) {
-        return { ok: false, message: "Энэ и-мэйл бүртгэлтэй байна." };
+      setCurrentUser(data.user);
+      await refreshOrders();
+      return { ok: true, user: data.user };
+    } catch (err) {
+      if (err.status === 429) {
+        return { ok: false, message: err.message || "Түр хүлээнэ үү." };
       }
+      return { ok: false, message: err.message || "Нэвтрэлт амжилтгүй." };
+    }
+  }, [refreshOrders]);
 
-      const newUser = {
-        id: Date.now(),
-        fullName: fullName.trim(),
-        email: normalizedEmail,
-        password,
-        authenticatorSecret: `bd-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        createdAt: new Date().toISOString(),
-      };
-
-      setUsers((prev) => [...prev, newUser]);
-      setCurrentUser({ id: newUser.id, fullName: newUser.fullName, email: newUser.email });
-      return { ok: true, user: newUser };
-    },
-    [users]
-  );
-
-  const loginUser = useCallback(
-    ({ email, password, authenticatorCode }) => {
-      const normalizedEmail = email.trim().toLowerCase();
-      const foundUser = users.find(
-        (u) => u.email === normalizedEmail && u.password === password
-      );
-      if (!foundUser) {
-        return { ok: false, message: "И-мэйл эсвэл нууц үг буруу байна." };
-      }
-
-      // Backward compatibility: old accounts might not have a secret yet.
-      const activeSecret =
-        foundUser.authenticatorSecret ||
-        `bd-${foundUser.id}-${Math.random().toString(36).slice(2, 8)}`;
-      if (!foundUser.authenticatorSecret) {
-        setUsers((prev) =>
-          prev.map((u) =>
-            u.id === foundUser.id ? { ...u, authenticatorSecret: activeSecret } : u
-          )
-        );
-      }
-
-      if (!authenticatorCode) {
-        return {
-          ok: false,
-          requiresAuthenticator: true,
-          message: "Authenticator кодоо оруулна уу.",
-        };
-      }
-
-      const nowCode = buildAuthenticatorCode(activeSecret, Date.now());
-      const prevCode = buildAuthenticatorCode(activeSecret, Date.now() - 30000);
-      const nextCode = buildAuthenticatorCode(activeSecret, Date.now() + 30000);
-      const normalizedCode = String(authenticatorCode).trim();
-      if (![nowCode, prevCode, nextCode].includes(normalizedCode)) {
-        return { ok: false, message: "Authenticator код буруу байна." };
-      }
-
-      setCurrentUser({
-        id: foundUser.id,
-        fullName: foundUser.fullName,
-        email: foundUser.email,
+  const updateProfile = useCallback(async ({ fullName, email }) => {
+    if (!currentUser) {
+      return { ok: false, message: "Нэвтрээгүй байна." };
+    }
+    try {
+      const data = await apiPatch("/users/me", {
+        fullName: String(fullName || "").trim(),
+        email: String(email || "").trim(),
       });
-      return { ok: true, user: foundUser };
-    },
-    [users, buildAuthenticatorCode]
-  );
+      setCurrentUser(data.user);
+      return { ok: true, user: data.user };
+    } catch (err) {
+      return { ok: false, message: err.message || "Хадгалалт амжилтгүй." };
+    }
+  }, [currentUser]);
 
-  const getDemoAuthenticatorCode = useCallback(
-    (email) => {
-      const normalizedEmail = email.trim().toLowerCase();
-      const foundUser = users.find((u) => u.email === normalizedEmail);
-      if (!foundUser) return null;
-      return buildAuthenticatorCode(foundUser.authenticatorSecret);
-    },
-    [users, buildAuthenticatorCode]
-  );
-
-  const updateProfile = useCallback(
-    ({ fullName, email }) => {
-      if (!currentUser) {
-        return { ok: false, message: "Нэвтрээгүй байна." };
-      }
-      const normalizedEmail = email.trim().toLowerCase();
-      if (!normalizedEmail) {
-        return { ok: false, message: "И-мэйл хоосон байж болохгүй." };
-      }
-      if (users.some((u) => u.email === normalizedEmail && u.id !== currentUser.id)) {
-        return { ok: false, message: "Энэ и-мэйл өөр хэрэглэгч дээр бүртгэлтэй байна." };
-      }
-
-      setUsers((prev) =>
-        prev.map((u) =>
-          u.id === currentUser.id
-            ? { ...u, fullName: fullName.trim(), email: normalizedEmail }
-            : u
-        )
-      );
-      const next = {
-        id: currentUser.id,
-        fullName: fullName.trim(),
-        email: normalizedEmail,
-      };
-      setCurrentUser(next);
-      return { ok: true, user: next };
-    },
-    [currentUser, users]
-  );
-
-  const logoutUser = useCallback(() => {
+  const logoutUser = useCallback(async () => {
+    try {
+      await apiPost("/auth/logout", {});
+    } catch {
+      // Still clear local session UI if the network fails.
+    }
     setCurrentUser(null);
+    setOrders([]);
   }, []);
 
   const value = useMemo(
@@ -235,23 +201,37 @@ export function AppProvider({ children }) {
       orders,
       reviews,
       toasts,
+      authLoading,
       toggleFavorite,
       createOrder,
       cancelOrder,
       updateOrder,
       addReview,
       addToast,
-      users,
       currentUser,
       registerUser,
       loginUser,
-      getDemoAuthenticatorCode,
       updateProfile,
       logoutUser,
     }),
-    [restaurants, orders, reviews, toasts,
-     toggleFavorite, createOrder, cancelOrder, updateOrder, addReview, addToast,
-     users, currentUser, registerUser, loginUser, getDemoAuthenticatorCode, updateProfile, logoutUser]
+    [
+      restaurants,
+      orders,
+      reviews,
+      toasts,
+      authLoading,
+      toggleFavorite,
+      createOrder,
+      cancelOrder,
+      updateOrder,
+      addReview,
+      addToast,
+      currentUser,
+      registerUser,
+      loginUser,
+      updateProfile,
+      logoutUser,
+    ]
   );
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

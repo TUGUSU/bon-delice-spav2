@@ -27,16 +27,24 @@ function OrdersPage() {
     setEditTime(order.time);
   }
 
-  function handleEditSave() {
+  async function handleEditSave() {
     if (!editDate || !editTime) return;
-    updateOrder(editTarget.id, { date: editDate, time: editTime });
-    addToast("Захиалга амжилттай шинэчлэгдлээ", "info");
-    setEditTarget(null);
+    try {
+      await updateOrder(editTarget.id, { date: editDate, time: editTime });
+      addToast("Захиалга амжилттай шинэчлэгдлээ", "info");
+      setEditTarget(null);
+    } catch (err) {
+      addToast(err.message || "Өөрчлөлт хадгалагдсангүй.", "error");
+    }
   }
 
-  function handleCancel(id) {
-    cancelOrder(id);
-    addToast("Захиалга цуцлагдлаа.", "error");
+  async function handleCancel(id) {
+    try {
+      await cancelOrder(id);
+      addToast("Захиалга цуцлагдлаа.", "error");
+    } catch (err) {
+      addToast(err.message || "Цуцлаж чадсангүй.", "error");
+    }
   }
 
   const today = new Date().toISOString().split("T")[0];

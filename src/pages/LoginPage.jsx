@@ -1,30 +1,30 @@
-import React, { useState } from "react";
-import { EyeOff, Mail } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { EyeOff, UserRound } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useApp } from "../context/AppContext";
 
 function LoginPage() {
   const navigate = useNavigate();
-  const { loginUser, getDemoAuthenticatorCode, addToast } = useApp();
-  const [email, setEmail] = useState("");
+  const location = useLocation();
+  const { loginUser, addToast } = useApp();
+  const [username, setUsername] = useState(
+    () => location.state?.prefillUsername || ""
+  );
   const [password, setPassword] = useState("");
-  const [authenticatorCode, setAuthenticatorCode] = useState("");
-  const [authStep, setAuthStep] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
 
-  function handleSubmit(e) {
+  const prefillUsername = location.state?.prefillUsername;
+  useEffect(() => {
+    if (typeof prefillUsername !== "string") return;
+    const next = prefillUsername.trim().toLowerCase();
+    if (!next) return;
+    setUsername(next);
+  }, [prefillUsername]);
+
+  async function handleSubmit(e) {
     e.preventDefault();
-    const result = loginUser({ email, password, authenticatorCode });
+    const result = await loginUser({ username, password });
     if (!result.ok) {
-      if (result.requiresAuthenticator) {
-        setAuthStep(true);
-        addToast("Authenticator кодоо оруулна уу.", "info");
-        const code = getDemoAuthenticatorCode(email);
-        if (code) {
-          window.alert(`Demo Authenticator код: ${code}`);
-        }
-        return;
-      }
       addToast(result.message, "error");
       return;
     }
@@ -54,21 +54,20 @@ function LoginPage() {
           </button>
         </div>
 
-        <p className="login-helper">Цахим хаягаар нэвтрэх үү?</p>
+        <p className="login-helper">Хэрэглэгчийн нэрээр нэвтрэх</p>
 
         <form className="login-form" onSubmit={handleSubmit}>
           <label className="login-field">
-            <span className="login-field-label">И-мэйл</span>
+            <span className="login-field-label">Хэрэглэгчийн нэр</span>
             <div className="login-input-wrap">
               <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="И-мэйл"
-                autoComplete="email"
-                disabled={authStep}
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Хэрэглэгчийн нэр"
+                autoComplete="username"
               />
-              <Mail size={16} />
+              <UserRound size={16} />
             </div>
           </label>
 
@@ -81,27 +80,10 @@ function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Нууц үг"
                 autoComplete="current-password"
-                disabled={authStep}
               />
               <EyeOff size={16} />
             </div>
           </label>
-
-          {authStep && (
-            <label className="login-field">
-              <span className="login-field-label">Authenticator код</span>
-              <div className="login-input-wrap">
-                <input
-                  type="text"
-                  value={authenticatorCode}
-                  onChange={(e) => setAuthenticatorCode(e.target.value)}
-                  placeholder="6 оронтой код"
-                  inputMode="numeric"
-                  maxLength={6}
-                />
-              </div>
-            </label>
-          )}
 
           <div className="login-row">
             <label className="login-remember">
@@ -113,30 +95,13 @@ function LoginPage() {
               <span>Намайг сана</span>
             </label>
 
-            {!authStep ? (
-              <Link className="login-forgot" to="/login">
-                Нууц үгээ мартсан уу?
-              </Link>
-            ) : (
-              <button
-                type="button"
-                className="login-forgot"
-                onClick={() => {
-                  const code = getDemoAuthenticatorCode(email);
-                  if (!code) {
-                    addToast("Энэ и-мэйлээр хэрэглэгч олдсонгүй.", "error");
-                    return;
-                  }
-                  window.alert(`Demo Authenticator код: ${code}`);
-                }}
-              >
-                Demo код харах
-              </button>
-            )}
+            <Link className="login-forgot" to="/login">
+              Нууц үгээ мартсан уу?
+            </Link>
           </div>
 
           <button type="submit" className="login-submit">
-            {authStep ? "Кодоор баталгаажуулж нэвтрэх" : "Нэвтрэх"}
+            Нэвтрэх
           </button>
         </form>
 
@@ -150,7 +115,7 @@ function LoginPage() {
           Нэвтрэх
         </Link>
         <Link to="/register" className="login-bottom-item">
-          Профайл
+          Бүртгүүлэх
         </Link>
       </nav>
     </section>

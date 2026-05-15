@@ -40,8 +40,8 @@ function Header() {
         }
     }
 
-    function handleLogout() {
-        logoutUser();
+    async function handleLogout() {
+        await logoutUser();
         setMenuOpen(false);
         navigate("/login");
     }

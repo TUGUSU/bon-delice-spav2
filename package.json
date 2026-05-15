@@ -4,16 +4,24 @@
   "private": true,
   "scripts": {
     "start": "webpack serve --config webpack_config.js --mode development",
-    "build": "webpack --config webpack_config.js --mode production"
+    "build": "webpack --config webpack_config.js --mode production",
+    "server": "node server/index.js",
+    "dev": "concurrently \"npm run server\" \"npm start\""
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
     "lucide-react": "^1.14.0",
-    "node": "^26.0.0",
+    "mongoose": "^8.9.5",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router-dom": "^7.14.1"
   },
   "devDependencies": {
+    "concurrently": "^9.1.2",
     "@babel/core": "^7.29.0",
     "@babel/preset-env": "^7.29.2",
     "@babel/preset-react": "^7.28.5",
