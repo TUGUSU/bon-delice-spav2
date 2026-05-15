@@ -1,8 +1,12 @@
 /**
  * API client — session cookie (httpOnly). Always send credentials for same-site API.
  * Dev: webpack-dev-server proxies /api → PORT (default 4000).
+ * Netlify: set NETLIFY_API_URL so /api is proxied to your Express host (keep default /api).
  */
-const API_PREFIX = "/api";
+const API_PREFIX =
+  typeof process !== "undefined" && process.env && process.env.API_BASE_URL
+    ? process.env.API_BASE_URL
+    : "/api";
 
 async function parseJsonSafe(res) {
   const text = await res.text();

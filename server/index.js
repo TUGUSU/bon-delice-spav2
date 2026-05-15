@@ -17,7 +17,7 @@ const PORT = parseInt(process.env.PORT || "4000", 10);
 
 const originList = (
   process.env.CORS_ORIGIN ||
-  "http://localhost:3000,http://127.0.0.1:3000"
+  "http://localhost:3000,http://127.0.0.1:3000,https://bon-delice.netlify.app"
 )
   .split(",")
   .map((s) => s.trim())

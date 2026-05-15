@@ -1,7 +1,10 @@
 const path = require("path");
+const webpack = require("webpack");
 require("dotenv").config({ path: path.join(__dirname, ".env") });
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+
+const apiBaseUrl = (process.env.API_BASE_URL || "/api").replace(/\/$/, "") || "/api";
 
 const apiPort = parseInt(process.env.PORT || "4000", 10);
 const apiProxyTarget =
@@ -36,6 +39,9 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.DefinePlugin({
+      "process.env.API_BASE_URL": JSON.stringify(apiBaseUrl),
+    }),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),
